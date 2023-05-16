@@ -102,16 +102,5 @@ export const authOptions: NextAuthOptions = {
       }
     },
   },
-  logger: {
-    error(code, metadata) {
-      console.log(code, metadata)
-    },
-    warn(code) {
-      console.warn(code)
-    },
-    debug(code, metadata) {
-      console.debug(code, metadata)
-    }
-  },
   debug: true
 }
