@@ -84,10 +84,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}
-          <Analytics />
           <Toaster />
           <TailwindIndicator />
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   )
