@@ -42,5 +42,5 @@ export default withAuth(
 )
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/editor/:path*", "/login", "/register", '/((?!_next|api/auth).*)(.+)'],
+  matcher: ["/dashboard/:path*", "/editor/:path*", "/login", "/register", '/((?!_next|api/auth).*)(.+)', "/"],
 }
