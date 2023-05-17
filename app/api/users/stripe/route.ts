@@ -56,6 +56,7 @@ export async function GET(req: Request) {
       return new Response(JSON.stringify(error.issues), { status: 422 })
     }
 
+    console.log(`error: ${error}`)
     return new Response(null, { status: 500 })
   }
 }
