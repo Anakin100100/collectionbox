@@ -56,7 +56,7 @@ export async function GET(req: Request) {
       return new Response(JSON.stringify(error.issues), { status: 422 })
     }
 
-    console.log(`Stripe error has been enountred: ${error}`)
+    console.log(`Stripe error has occured: ${error}`)
     return new Response(null, { status: 500 })
   }
 }
