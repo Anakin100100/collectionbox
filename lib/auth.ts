@@ -2,13 +2,13 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import { NextAuthOptions } from "next-auth"
 import EmailProvider from "next-auth/providers/email"
 import GitHubProvider from "next-auth/providers/github"
-import { Client } from "postmark"
 
 import { env } from "@/env.mjs"
-import { siteConfig } from "@/config/site"
 import { db } from "@/lib/db"
 
-const postmarkClient = new Client(env.POSTMARK_API_TOKEN)
+import sgMail from '@sendgrid/mail';
+
+sgMail.setApiKey(env.SENDGRID_API_KEY);
 
 export const authOptions: NextAuthOptions = {
   // huh any! I know.
@@ -36,38 +36,56 @@ export const authOptions: NextAuthOptions = {
           select: {
             emailVerified: true,
           },
-        })
-
-        const templateId = user?.emailVerified
-          ? env.POSTMARK_SIGN_IN_TEMPLATE
-          : env.POSTMARK_ACTIVATION_TEMPLATE
-        if (!templateId) {
-          throw new Error("Missing template id")
-        }
-
-        const result = await postmarkClient.sendEmailWithTemplate({
-          TemplateId: parseInt(templateId),
-          To: identifier,
-          From: provider.from as string,
-          TemplateModel: {
-            action_url: url,
-            product_name: siteConfig.name,
+        });
+    
+        // Simple sign-in and sign-up email templates
+        const signInTemplate = `
+          <html>
+          <body>
+            <h1>Welcome Back</h1>
+            <p>Please click the link below to sign in to your account:</p>
+            <a href="${url}">Sign In</a>
+          </body>
+          </html>
+        `;
+    
+        const signUpTemplate = `
+          <html>
+          <body>
+            <h1>Activate your account</h1>
+            <p>Please click the link below to activate your account:</p>
+            <a href="${url}">Activate Account</a>
+          </body>
+          </html>
+        `;
+    
+        const emailTemplate = user?.emailVerified ? signInTemplate : signUpTemplate;
+    
+        const msg = {
+          to: identifier,
+          from: provider.from as string,
+          subject: user?.emailVerified ? 'Sign In' : 'Activate your account',
+          html: emailTemplate,
+          headers: {
+            // Set this to prevent Gmail from threading emails.
+            // See https://stackoverflow.com/questions/23434110/force-emails-not-to-be-grouped-into-conversations/25435722.
+            'X-Entity-Ref-ID': new Date().getTime() + '',
           },
-          Headers: [
-            {
-              // Set this to prevent Gmail from threading emails.
-              // See https://stackoverflow.com/questions/23434110/force-emails-not-to-be-grouped-into-conversations/25435722.
-              Name: "X-Entity-Ref-ID",
-              Value: new Date().getTime() + "",
-            },
-          ],
-        })
-
-        if (result.ErrorCode) {
-          throw new Error(result.Message)
+        };
+    
+        try {
+          await sgMail.send(msg);
+        } catch (error) {
+          console.error(error);
+    
+          if (error.response) {
+            console.error(error.response.body);
+          }
+    
+          throw new Error('Failed to send email');
         }
       },
-    }),
+    })    
   ],
   callbacks: {
     async session({ token, session }) {
