@@ -9,7 +9,8 @@
     "turbo": "next dev --turbo",
     "start": "next start",
     "lint": "next lint",
-    "preview": "next build && next start"
+    "preview": "next build && next start",
+    "cypress": "cypress open"
   },
   "dependencies": {
     "@editorjs/code": "^2.8.0",
@@ -93,6 +94,7 @@
     "@types/react": "18.0.15",
     "@types/react-dom": "18.0.6",
     "autoprefixer": "^10.4.14",
+    "cypress": "^12.13.0",
     "eslint": "^8.39.0",
     "eslint-config-next": "13.0.0",
     "eslint-config-prettier": "^8.8.0",
