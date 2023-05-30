@@ -1,17 +1,17 @@
 import Link from "next/link"
 
-import { cn } from "@/lib/utils"
-import { buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
+import { buttonVariants } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
 
 export const metadata = {
-  title: "About",
+  title: "Contact",
 }
 
-export default function PricingPage() {
+export default function ContactPage() {
   return (
-    <section className="container flex flex-col  gap-6 py-8 md:max-w-[64rem] md:py-12 lg:py-24">
-      <div className="mx-auto flex w-full flex-col items-center gap-4 md:max-w-[58rem]">
+    <section className="container flex flex-col  gap-6 py-8 md:py-12 lg:py-24">
+      <div className="mx-auto flex w-full flex-col items-center gap-4">
         <h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl ">
           Reach out to talk with a founder
         </h2>

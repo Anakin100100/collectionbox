@@ -1,10 +1,11 @@
 import { notFound } from "next/navigation"
 
-import { dashboardConfig } from "@/config/dashboard"
-import { getCurrentUser } from "@/lib/session"
 import { MainNav } from "@/components/main-nav"
 import { DashboardNav } from "@/components/nav"
 import { UserAccountNav } from "@/components/user-account-nav"
+import { dashboardConfig } from "@/config/dashboard"
+import { marketingConfig } from "@/config/marketing"
+import { getCurrentUser } from "@/lib/session"
 
 interface DashboardLayoutProps {
   children?: React.ReactNode
@@ -22,8 +23,8 @@ export default async function DashboardLayout({
   return (
     <div className="flex min-h-screen flex-col space-y-6">
       <header className="sticky top-0 z-40 border-b bg-background">
-        <div className="container flex h-16 items-center justify-between py-4">
-          <MainNav items={dashboardConfig.mainNav} />
+        <div className="container flex h-20 items-center justify-between py-4">
+          <MainNav items={marketingConfig.mainNav} />
           <UserAccountNav
             user={{
               name: user.name,
