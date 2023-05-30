@@ -7,11 +7,15 @@ import Link from "next/link"
 import { buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
+import { UserAccountNav } from "@/components/user-account-nav"
+import { getCurrentUser } from "@/lib/session"
+
 interface DocsLayoutProps {
   children: React.ReactNode
 }
 
-export default function DocsLayout({ children }: DocsLayoutProps) {
+export default async function DocsLayout({ children }: DocsLayoutProps) {
+  const user = await getCurrentUser()
   return (
     <div className="flex min-h-screen flex-col">
       <header className="sticky top-0 z-40 w-full border-b bg-background">
@@ -19,17 +23,33 @@ export default function DocsLayout({ children }: DocsLayoutProps) {
           <MainNav items={marketingConfig.mainNav}>
             <DocsSidebarNav items={docsConfig.sidebarNav} />
           </MainNav>
-          <nav>
-            <Link
-              href="/login"
-              className={cn(
-                buttonVariants({ variant: "secondary", size: "sm" }),
-                "px-4"
-              )}
-            >
-              Login
-            </Link>
-          </nav>
+          {(() => {
+            if (!user) {
+              return (
+                <nav>
+                  <Link
+                    href="/login"
+                    className={cn(
+                      buttonVariants({ variant: "secondary", size: "sm" }),
+                      "px-4"
+                    )}
+                  >
+                    Login
+                  </Link>
+                </nav>
+              )
+            } else {
+              return (
+                <UserAccountNav
+                  user={{
+                    name: user.name,
+                    image: user.image,
+                    email: user.email,
+                  }}
+                />
+              )
+            }
+          })()}
         </div>
       </header>
       <div className="container flex-1">{children}</div>
