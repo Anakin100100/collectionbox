@@ -23,7 +23,7 @@ export default async function DashboardLayout({
   return (
     <div className="flex min-h-screen flex-col space-y-6">
       <header className="sticky top-0 z-40 border-b bg-background">
-        <div className="container flex h-20 items-center justify-between py-4">
+        <div className="container flex h-20 items-center space-x-4 sm:justify-between sm:space-x-0">
           <MainNav items={marketingConfig.mainNav} />
           <UserAccountNav
             user={{

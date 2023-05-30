@@ -2,6 +2,10 @@ import { MainNav } from "@/components/main-nav"
 import { DocsSidebarNav } from "@/components/sidebar-nav"
 import { docsConfig } from "@/config/docs"
 import { marketingConfig } from "@/config/marketing"
+import Link from "next/link"
+
+import { buttonVariants } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
 
 interface DocsLayoutProps {
   children: React.ReactNode
@@ -15,6 +19,17 @@ export default function DocsLayout({ children }: DocsLayoutProps) {
           <MainNav items={marketingConfig.mainNav}>
             <DocsSidebarNav items={docsConfig.sidebarNav} />
           </MainNav>
+          <nav>
+            <Link
+              href="/login"
+              className={cn(
+                buttonVariants({ variant: "secondary", size: "sm" }),
+                "px-4"
+              )}
+            >
+              Login
+            </Link>
+          </nav>
         </div>
       </header>
       <div className="container flex-1">{children}</div>
