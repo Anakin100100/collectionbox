@@ -29,12 +29,14 @@ import {
   Twitter,
   User,
   X,
+  Building2,
   type Icon as LucideIcon,
 } from "lucide-react"
 
 export type Icon = LucideIcon
 
 export const Icons = {
+  organization: Building2,
   email: Mail,
   address: Home,
   facebook: Facebook,
