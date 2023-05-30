@@ -1,13 +1,13 @@
 import { Inter as FontSans } from "next/font/google"
 import localFont from "next/font/local"
 
-import "@/styles/globals.css"
-import { siteConfig } from "@/config/site"
-import { absoluteUrl, cn } from "@/lib/utils"
-import { Toaster } from "@/components/ui/toaster"
 import { Analytics } from "@/components/analytics"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
+import { Toaster } from "@/components/ui/toaster"
+import { siteConfig } from "@/config/site"
+import { cn } from "@/lib/utils"
+import "@/styles/globals.css"
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -39,11 +39,10 @@ export const metadata = {
   ],
   authors: [
     {
-      name: "shadcn",
-      url: "https://shadcn.com",
+      name: "Paweł Biegun",
     },
   ],
-  creator: "shadcn",
+  creator: "Paweł Biegun",
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "white" },
     { media: "(prefers-color-scheme: dark)", color: "black" },
@@ -55,13 +54,6 @@ export const metadata = {
     title: siteConfig.name,
     description: siteConfig.description,
     siteName: siteConfig.name,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: siteConfig.name,
-    description: siteConfig.description,
-    images: [`${siteConfig.url}/og.jpg`],
-    creator: "@shadcn",
   },
   icons: {
     icon: "/favicon.ico",
