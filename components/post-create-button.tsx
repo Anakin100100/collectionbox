@@ -1,18 +1,18 @@
 "use client"
 
-import * as React from "react"
 import { useRouter } from "next/navigation"
+import * as React from "react"
 
-import { cn } from "@/lib/utils"
 import { ButtonProps, buttonVariants } from "@/components/ui/button"
 import { toast } from "@/components/ui/use-toast"
-import { Icons } from "@/components/icons"
+import { cn } from "@/lib/utils"
 
 interface PostCreateButtonProps extends ButtonProps {}
 
 export function PostCreateButton({
   className,
   variant,
+  size,
   ...props
 }: PostCreateButtonProps) {
   const router = useRouter()
@@ -61,21 +61,16 @@ export function PostCreateButton({
     <button
       onClick={onClick}
       className={cn(
-        buttonVariants({ variant }),
+        buttonVariants({ variant, size }),
         {
-          "cursor-not-allowed opacity-60": isLoading,
+          "cursor-not-allowed opacity-60 break-normal": isLoading,
         },
         className
       )}
       disabled={isLoading}
       {...props}
     >
-      {isLoading ? (
-        <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-      ) : (
-        <Icons.add className="mr-2 h-4 w-4" />
-      )}
-      New post
+      New Collection Box
     </button>
   )
 }

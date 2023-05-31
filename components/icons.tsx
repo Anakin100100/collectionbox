@@ -2,6 +2,7 @@ import {
   AlertTriangle,
   ArrowRight,
   Banknote,
+  Building2,
   Check,
   ChevronLeft,
   ChevronRight,
@@ -21,6 +22,7 @@ import {
   Moon,
   MoreVertical,
   Phone,
+  PiggyBank,
   Pizza,
   Plus,
   Settings,
@@ -29,13 +31,13 @@ import {
   Twitter,
   User,
   X,
-  Building2,
   type Icon as LucideIcon,
 } from "lucide-react"
 
 export type Icon = LucideIcon
 
 export const Icons = {
+  collectionBox: PiggyBank,
   organization: Building2,
   email: Mail,
   address: Home,

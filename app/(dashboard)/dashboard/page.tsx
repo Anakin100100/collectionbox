@@ -1,13 +1,13 @@
 import { redirect } from "next/navigation"
 
-import { authOptions } from "@/lib/auth"
-import { db } from "@/lib/db"
-import { getCurrentUser } from "@/lib/session"
 import { EmptyPlaceholder } from "@/components/empty-placeholder"
 import { DashboardHeader } from "@/components/header"
 import { PostCreateButton } from "@/components/post-create-button"
 import { PostItem } from "@/components/post-item"
 import { DashboardShell } from "@/components/shell"
+import { authOptions } from "@/lib/auth"
+import { db } from "@/lib/db"
+import { getCurrentUser } from "@/lib/session"
 
 export const metadata = {
   title: "Dashboard",
@@ -37,7 +37,10 @@ export default async function DashboardPage() {
 
   return (
     <DashboardShell>
-      <DashboardHeader heading="Posts" text="Create and manage posts.">
+      <DashboardHeader
+        heading="Collection Boxes"
+        text="Create and manage Collection Boxes"
+      >
         <PostCreateButton />
       </DashboardHeader>
       <div>
@@ -49,12 +52,14 @@ export default async function DashboardPage() {
           </div>
         ) : (
           <EmptyPlaceholder>
-            <EmptyPlaceholder.Icon name="post" />
-            <EmptyPlaceholder.Title>No posts created</EmptyPlaceholder.Title>
+            <EmptyPlaceholder.Icon name="collectionBox" />
+            <EmptyPlaceholder.Title>
+              No Collection Boxes created
+            </EmptyPlaceholder.Title>
             <EmptyPlaceholder.Description>
-              You don&apos;t have any posts yet. Start creating content.
+              You don&apos;t have any Collection Boxes yet.
             </EmptyPlaceholder.Description>
-            <PostCreateButton variant="outline" />
+            <PostCreateButton variant="outline" size="xlg" />
           </EmptyPlaceholder>
         )}
       </div>

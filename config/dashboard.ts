@@ -3,9 +3,9 @@ import { DashboardConfig } from "types"
 export const dashboardConfig: DashboardConfig = {
   sidebarNav: [
     {
-      title: "Posts",
+      title: "CollectionBoxes",
       href: "/dashboard",
-      icon: "post",
+      icon: "collectionBox",
     },
     {
       title: "Billing",
