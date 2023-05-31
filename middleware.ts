@@ -19,14 +19,14 @@ export default withAuth(
     }
 
     if (!isAuth) {
-      let from = req.nextUrl.pathname;
+      let from = req.nextUrl.pathname
       if (req.nextUrl.search) {
-        from += req.nextUrl.search;
+        from += req.nextUrl.search
       }
 
       return NextResponse.redirect(
         new URL(`/login?from=${encodeURIComponent(from)}`, req.url)
-      );
+      )
     }
   },
   {
@@ -42,5 +42,5 @@ export default withAuth(
 )
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/editor/:path*", "/login", "/register"],
+  matcher: ["/dashboard/:path*", "/login", "/register"],
 }

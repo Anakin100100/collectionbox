@@ -59,6 +59,7 @@ specifiers:
   cross-env: ^7.0.3
   cypress: ^12.13.0
   date-fns: ^2.29.3
+  editorjs-html: ^3.4.2
   eslint: ^8.39.0
   eslint-config-next: 13.4.4
   eslint-config-prettier: ^8.8.0
@@ -148,6 +149,7 @@ dependencies:
   concurrently: 8.0.1
   contentlayer: 0.3.2
   date-fns: 2.30.0
+  editorjs-html: 3.4.2
   lucide-react: 0.92.0_prop-types@15.8.1+react@18.2.0
   next: 13.4.3_react-dom@18.2.0+react@18.2.0
   next-auth: 4.22.1_d6e7b73ebdce49772563688d1f8438b4
@@ -4600,6 +4602,10 @@ packages:
       jsbn: 0.1.1
       safer-buffer: 2.1.2
     dev: true
+
+  /editorjs-html/3.4.2:
+    resolution: {integrity: sha512-Gy8FV4oHMvnPDXLsdpZYW0Dgjaagff9bPd28/WW9aFdy87FvktJxQz8H+NKpxiGcGoNY27MmjFffurK2yhXjEg==}
+    dev: false
 
   /electron-to-chromium/1.4.411:
     resolution: {integrity: sha512-5VXLW4Qw89vM2WTICHua/y8v7fKGDRVa2VPOtBB9IpLvW316B+xd8yD1wTmLPY2ot/00P/qt87xdolj4aG/Lzg==}

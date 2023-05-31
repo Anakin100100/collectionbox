@@ -6,14 +6,10 @@ import { authOptions } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { getCurrentUser } from "@/lib/session"
 
-async function getCollectionBoxesForUser(
-  collectionBoxId: CollectionBox["id"],
-  userId: User["id"]
-) {
+async function getCollectionBoxesForUser(collectionBoxId: CollectionBox["id"]) {
   return await db.collectionBox.findFirst({
     where: {
       id: collectionBoxId,
-      userId: userId,
     },
   })
 }
@@ -25,14 +21,13 @@ interface EditorPageProps {
 export default async function EditorPage({ params }: EditorPageProps) {
   const user = await getCurrentUser()
 
+  var readonly = false
+
   if (!user) {
-    redirect(authOptions?.pages?.signIn || "/login")
+    readonly = true
   }
 
-  const collectionBox = await getCollectionBoxesForUser(
-    params.collectionBoxId,
-    user.id
-  )
+  const collectionBox = await getCollectionBoxesForUser(params.collectionBoxId)
 
   if (!collectionBox) {
     notFound()
@@ -46,6 +41,7 @@ export default async function EditorPage({ params }: EditorPageProps) {
         content: collectionBox.content,
         published: collectionBox.published,
       }}
+      readonly={readonly}
     />
   )
 }

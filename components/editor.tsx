@@ -19,11 +19,12 @@ import "@/styles/editor.css"
 
 interface EditorProps {
   collectionBox: Pick<CollectionBox, "id" | "title" | "content" | "published">
+  readonly: boolean
 }
 
 type FormData = z.infer<typeof collectionBoxPatchSchema>
 
-export function Editor({ collectionBox }: EditorProps) {
+export function Editor({ collectionBox, readonly }: EditorProps) {
   const { register, handleSubmit } = useForm<FormData>({
     resolver: zodResolver(collectionBoxPatchSchema),
   })
@@ -58,6 +59,7 @@ export function Editor({ collectionBox }: EditorProps) {
           table: Table,
           embed: Embed,
         },
+        readOnly: readonly,
       })
     }
   }, [collectionBox])
@@ -116,25 +118,58 @@ export function Editor({ collectionBox }: EditorProps) {
     return null
   }
 
+  var componentVisibility = "visible"
+  if (readonly) {
+    componentVisibility = "hidden"
+  }
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="grid w-full gap-10">
         <div className="flex w-full items-center justify-between">
           <div className="flex items-center space-x-10">
-            <Link
-              href="/dashboard"
-              className={cn(buttonVariants({ variant: "ghost" }))}
+            <>
+              {((readonly) => {
+                if (!readonly) {
+                  return (
+                    <Link
+                      href="/dashboard"
+                      className={cn(buttonVariants({ variant: "ghost" }))}
+                    >
+                      <>
+                        <Icons.chevronLeft className="mr-2 h-4 w-4" />
+                        Back
+                      </>
+                    </Link>
+                  )
+                } else {
+                  return (
+                    <Link
+                      href="/"
+                      className={cn(buttonVariants({ variant: "ghost" }))}
+                    >
+                      <>
+                        <Icons.logo className="mr-2 h-4 w-4" />
+                        CollectionBox
+                      </>
+                    </Link>
+                  )
+                }
+              })(readonly)}
+            </>
+            <p
+              className={cn(
+                "text-sm text-muted-foreground",
+                componentVisibility
+              )}
             >
-              <>
-                <Icons.chevronLeft className="mr-2 h-4 w-4" />
-                Back
-              </>
-            </Link>
-            <p className="text-sm text-muted-foreground">
               {collectionBox.published ? "Published" : "Draft"}
             </p>
           </div>
-          <button type="submit" className={cn(buttonVariants())}>
+          <button
+            type="submit"
+            className={cn(buttonVariants(), componentVisibility)}
+          >
             {isSaving && (
               <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
             )}
@@ -151,7 +186,7 @@ export function Editor({ collectionBox }: EditorProps) {
             {...register("title")}
           />
           <div id="editor" className="min-h-[500px]" />
-          <p className="text-sm text-gray-500">
+          <p className={cn("text-sm text-gray-500", componentVisibility)}>
             Use{" "}
             <kbd className="rounded-md border bg-muted px-1 text-xs uppercase">
               Tab
