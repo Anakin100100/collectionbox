@@ -21,7 +21,7 @@ export default async function DashboardLayout({
   }
 
   return (
-    <div className="flex flex-col space-y-2 md:space-y-6">
+    <div className="flex flex-col space-y-2 lg:space-y-6">
       <header className="sticky top-0 z-40 border-b bg-background">
         <div className="container flex h-20 w-full items-center justify-between space-x-4 sm:space-x-0">
           <MainNav items={marketingConfig.mainNav} />
@@ -34,8 +34,8 @@ export default async function DashboardLayout({
           />
         </div>
       </header>
-      <div className="container grid flex-1 gap-2 md:grid-cols-[200px_1fr] md:gap-12">
-        <aside className="max-h-content block md:w-[200px]">
+      <div className="container grid flex-1 gap-2 lg:grid-cols-[200px_1fr] lg:gap-12">
+        <aside className="max-h-content block lg:w-[200px]">
           <DashboardNav items={dashboardConfig.sidebarNav} />
         </aside>
         <main className="flex w-full flex-1 flex-col overflow-hidden">
