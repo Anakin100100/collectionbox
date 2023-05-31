@@ -1,7 +1,7 @@
 import { ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 
-import { env } from "@/env.mjs"
+const env = require("@/env")
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))

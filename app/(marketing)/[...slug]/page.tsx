@@ -1,15 +1,15 @@
-import { notFound } from "next/navigation"
 import { allPages } from "contentlayer/generated"
+import { notFound } from "next/navigation"
 
 import { Mdx } from "@/components/mdx-components"
 
 import "@/styles/mdx.css"
 import { Metadata } from "next"
 
-import { env } from "@/env.mjs"
 import { siteConfig } from "@/config/site"
 import { absoluteUrl } from "@/lib/utils"
 
+const env = require("@/env")
 interface PageProps {
   params: {
     slug: string[]

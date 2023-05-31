@@ -3,12 +3,13 @@ import { NextAuthOptions } from "next-auth"
 import EmailProvider from "next-auth/providers/email"
 import GitHubProvider from "next-auth/providers/github"
 
-import { env } from "@/env.mjs"
+const env = require("@/env")
+
 import { db } from "@/lib/db"
 
-import sgMail from '@sendgrid/mail';
+import sgMail from "@sendgrid/mail"
 
-sgMail.setApiKey(env.SENDGRID_API_KEY);
+sgMail.setApiKey(env.SENDGRID_API_KEY)
 
 export const authOptions: NextAuthOptions = {
   // huh any! I know.
@@ -36,8 +37,8 @@ export const authOptions: NextAuthOptions = {
           select: {
             emailVerified: true,
           },
-        });
-    
+        })
+
         // Simple sign-in and sign-up email templates
         const signInTemplate = `
           <html>
@@ -47,8 +48,8 @@ export const authOptions: NextAuthOptions = {
             <a href="${url}">Sign In</a>
           </body>
           </html>
-        `;
-    
+        `
+
         const signUpTemplate = `
           <html>
           <body>
@@ -57,35 +58,37 @@ export const authOptions: NextAuthOptions = {
             <a href="${url}">Activate Account</a>
           </body>
           </html>
-        `;
-    
-        const emailTemplate = user?.emailVerified ? signInTemplate : signUpTemplate;
-    
+        `
+
+        const emailTemplate = user?.emailVerified
+          ? signInTemplate
+          : signUpTemplate
+
         const msg = {
           to: identifier,
           from: provider.from as string,
-          subject: user?.emailVerified ? 'Sign In' : 'Activate your account',
+          subject: user?.emailVerified ? "Sign In" : "Activate your account",
           html: emailTemplate,
           headers: {
             // Set this to prevent Gmail from threading emails.
             // See https://stackoverflow.com/questions/23434110/force-emails-not-to-be-grouped-into-conversations/25435722.
-            'X-Entity-Ref-ID': new Date().getTime() + '',
+            "X-Entity-Ref-ID": new Date().getTime() + "",
           },
-        };
-    
+        }
+
         try {
-          await sgMail.send(msg);
+          await sgMail.send(msg)
         } catch (error) {
-          console.error(error);
-    
+          console.error(error)
+
           if (error.response) {
-            console.error(error.response.body);
+            console.error(error.response.body)
           }
-    
-          throw new Error('Failed to send email');
+
+          throw new Error("Failed to send email")
         }
       },
-    })    
+    }),
   ],
   callbacks: {
     async session({ token, session }) {
@@ -120,5 +123,5 @@ export const authOptions: NextAuthOptions = {
       }
     },
   },
-  debug: true
+  debug: true,
 }

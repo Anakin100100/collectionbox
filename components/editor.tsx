@@ -1,21 +1,21 @@
 "use client"
 
-import * as React from "react"
-import Link from "next/link"
-import { useRouter } from "next/navigation"
 import EditorJS from "@editorjs/editorjs"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Post } from "@prisma/client"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
+import * as React from "react"
 import { useForm } from "react-hook-form"
 import TextareaAutosize from "react-textarea-autosize"
 import * as z from "zod"
 
-import "@/styles/editor.css"
-import { cn } from "@/lib/utils"
-import { postPatchSchema } from "@/lib/validations/post"
+import { Icons } from "@/components/icons"
 import { buttonVariants } from "@/components/ui/button"
 import { toast } from "@/components/ui/use-toast"
-import { Icons } from "@/components/icons"
+import { cn } from "@/lib/utils"
+import { postPatchSchema } from "@/lib/validations/post"
+import "@/styles/editor.css"
 
 interface EditorProps {
   post: Pick<Post, "id" | "title" | "content" | "published">
@@ -38,9 +38,7 @@ export function Editor({ post }: EditorProps) {
     const Embed = (await import("@editorjs/embed")).default
     const Table = (await import("@editorjs/table")).default
     const List = (await import("@editorjs/list")).default
-    const Code = (await import("@editorjs/code")).default
     const LinkTool = (await import("@editorjs/link")).default
-    const InlineCode = (await import("@editorjs/inline-code")).default
 
     const body = postPatchSchema.parse(post)
 
@@ -57,8 +55,6 @@ export function Editor({ post }: EditorProps) {
           header: Header,
           linkTool: LinkTool,
           list: List,
-          code: Code,
-          inlineCode: InlineCode,
           table: Table,
           embed: Embed,
         },

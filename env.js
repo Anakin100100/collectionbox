@@ -1,7 +1,7 @@
-import { createEnv } from "@t3-oss/env-nextjs"
-import { z } from "zod"
+const t3 = require("@t3-oss/env-nextjs")
+const z = require("zod")
 
-export const env = createEnv({
+module.exports = t3.createEnv({
   server: {
     // This is optional because it's only used in development.
     // See https://next-auth.js.org/deployment.

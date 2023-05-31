@@ -1,5 +1,5 @@
-import { notFound } from "next/navigation"
 import { allAuthors, allPosts } from "contentlayer/generated"
+import { notFound } from "next/navigation"
 
 import { Mdx } from "@/components/mdx-components"
 
@@ -8,10 +8,11 @@ import { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
 
-import { env } from "@/env.mjs"
-import { absoluteUrl, cn, formatDate } from "@/lib/utils"
-import { buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
+import { buttonVariants } from "@/components/ui/button"
+import { absoluteUrl, cn, formatDate } from "@/lib/utils"
+
+const env = require("@/env")
 
 interface PostPageProps {
   params: {

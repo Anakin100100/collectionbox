@@ -1,5 +1,6 @@
 import { SubscriptionPlan } from "types"
-import { env } from "@/env.mjs"
+
+const env = require("@/env")
 
 export const freePlan: SubscriptionPlan = {
   name: "Free",

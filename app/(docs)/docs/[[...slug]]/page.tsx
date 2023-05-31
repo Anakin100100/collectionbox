@@ -10,8 +10,8 @@ import { getTableOfContents } from "@/lib/toc"
 import "@/styles/mdx.css"
 import { Metadata } from "next"
 
-import { env } from "@/env.mjs"
 import { absoluteUrl } from "@/lib/utils"
+const env = require("@/env")
 
 interface DocPageProps {
   params: {

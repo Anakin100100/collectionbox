@@ -1,9 +1,10 @@
 import { headers } from "next/headers"
 import Stripe from "stripe"
 
-import { env } from "@/env.mjs"
 import { db } from "@/lib/db"
 import { stripe } from "@/lib/stripe"
+
+const env = require("@/env")
 
 export async function POST(req: Request) {
   const body = await req.text()
