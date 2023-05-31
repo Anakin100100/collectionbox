@@ -3,9 +3,9 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
-import { SidebarNavItem } from "types"
-import { cn } from "@/lib/utils"
 import { Icons } from "@/components/icons"
+import { cn } from "@/lib/utils"
+import { SidebarNavItem } from "types"
 
 interface DashboardNavProps {
   items: SidebarNavItem[]
@@ -19,7 +19,7 @@ export function DashboardNav({ items }: DashboardNavProps) {
   }
 
   return (
-    <nav className="grid items-start gap-2">
+    <nav className="w-full flex justify-between lg:grid lg:items-start lg:gap-2">
       {items.map((item, index) => {
         const Icon = Icons[item.icon || "arrowRight"]
         return (
@@ -33,7 +33,9 @@ export function DashboardNav({ items }: DashboardNavProps) {
                 )}
               >
                 <Icon className="mr-2 h-4 w-4" />
-                <span>{item.title}</span>
+                <span className="hidden w-0 lg:w-auto lg:visible lg:block">
+                  {item.title}
+                </span>
               </span>
             </Link>
           )

@@ -10,18 +10,18 @@ export const metadata = {
 
 export default function ContactPage() {
   return (
-    <section className="container flex flex-col  gap-6 py-8 md:py-12 lg:py-24">
+    <section className="container flex flex-col gap-6 py-4 md:py-12 lg:py-24 px-6">
       <div className="mx-auto flex w-full flex-col items-center gap-4">
-        <h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl ">
+        <h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl text-center">
           Reach out to talk with a founder
         </h2>
       </div>
-      <div className="grid w-full items-start gap-10 rounded-lg border p-10 md:grid-cols-[1fr_200px]">
-        <div className="grid gap-6">
-          <h3 className="text-xl font-bold sm:text-2xl">
+      <div className="grid w-full items-start gap-10 rounded-lg p-2 md:p-10 border md:grid-cols-[1fr_200px]">
+        <div className="grid gap-6 justify-center">
+          <h3 className="text-xl font-bold sm:text-2xl text-center">
             Our contact information
           </h3>
-          <ul className="grid gap-3 text-sm text-muted-foreground sm:grid-cols-2">
+          <ul className="grid gap-3 text-sm text-muted-foreground sm:grid-cols-2 items-center">
             <li className="flex items-center">
               <Icons.email className="mr-2 h-4 w-4" />
               someemail@collectionbox.online

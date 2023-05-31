@@ -21,9 +21,9 @@ export default async function DashboardLayout({
   }
 
   return (
-    <div className="flex min-h-screen flex-col space-y-6">
+    <div className="flex flex-col space-y-2 md:space-y-6">
       <header className="sticky top-0 z-40 border-b bg-background">
-        <div className="container flex h-20 items-center space-x-4 sm:justify-between sm:space-x-0">
+        <div className="container flex w-full h-20 items-center space-x-4 justify-between sm:space-x-0">
           <MainNav items={marketingConfig.mainNav} />
           <UserAccountNav
             user={{
@@ -34,8 +34,8 @@ export default async function DashboardLayout({
           />
         </div>
       </header>
-      <div className="container grid flex-1 gap-12 md:grid-cols-[200px_1fr]">
-        <aside className="hidden w-[200px] flex-col md:flex">
+      <div className="container grid flex-1 gap-2 md:gap-12 md:grid-cols-[200px_1fr]">
+        <aside className="max-h-content md:w-[200px] block">
           <DashboardNav items={dashboardConfig.sidebarNav} />
         </aside>
         <main className="flex w-full flex-1 flex-col overflow-hidden">
