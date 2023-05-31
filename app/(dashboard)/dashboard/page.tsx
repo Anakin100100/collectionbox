@@ -1,9 +1,9 @@
 import { redirect } from "next/navigation"
 
+import { CollectionBoxCreateButton } from "@/components/collection-box-create-button"
+import { CollectionBoxItem } from "@/components/collection-box-item"
 import { EmptyPlaceholder } from "@/components/empty-placeholder"
 import { DashboardHeader } from "@/components/header"
-import { PostCreateButton } from "@/components/post-create-button"
-import { PostItem } from "@/components/post-item"
 import { DashboardShell } from "@/components/shell"
 import { authOptions } from "@/lib/auth"
 import { db } from "@/lib/db"
@@ -20,9 +20,9 @@ export default async function DashboardPage() {
     redirect(authOptions?.pages?.signIn || "/login")
   }
 
-  const posts = await db.post.findMany({
+  const collectionBoxes = await db.collectionBox.findMany({
     where: {
-      authorId: user.id,
+      userId: user.id,
     },
     select: {
       id: true,
@@ -41,13 +41,16 @@ export default async function DashboardPage() {
         heading="Collection Boxes"
         text="Create and manage Collection Boxes"
       >
-        <PostCreateButton />
+        <CollectionBoxCreateButton />
       </DashboardHeader>
       <div>
-        {posts?.length ? (
+        {collectionBoxes?.length ? (
           <div className="divide-y divide-border rounded-md border">
-            {posts.map((post) => (
-              <PostItem key={post.id} post={post} />
+            {collectionBoxes.map((collectionBox) => (
+              <CollectionBoxItem
+                key={collectionBox.id}
+                collectionBox={collectionBox}
+              />
             ))}
           </div>
         ) : (
@@ -59,7 +62,7 @@ export default async function DashboardPage() {
             <EmptyPlaceholder.Description>
               You don&apos;t have any Collection Boxes yet.
             </EmptyPlaceholder.Description>
-            <PostCreateButton variant="outline" size="xlg" />
+            <CollectionBoxCreateButton variant="outline" size="xlg" />
           </EmptyPlaceholder>
         )}
       </div>

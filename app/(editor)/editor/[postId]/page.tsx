@@ -1,22 +1,25 @@
+import { CollectionBox, User } from "@prisma/client"
 import { notFound, redirect } from "next/navigation"
-import { Post, User } from "@prisma/client"
 
+import { Editor } from "@/components/editor"
 import { authOptions } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { getCurrentUser } from "@/lib/session"
-import { Editor } from "@/components/editor"
 
-async function getPostForUser(postId: Post["id"], userId: User["id"]) {
-  return await db.post.findFirst({
+async function getCollectionBoxesForUser(
+  collectionBoxId: CollectionBox["id"],
+  userId: User["id"]
+) {
+  return await db.collectionBox.findFirst({
     where: {
-      id: postId,
-      authorId: userId,
+      id: collectionBoxId,
+      userId: userId,
     },
   })
 }
 
 interface EditorPageProps {
-  params: { postId: string }
+  params: { collectionBoxId: string }
 }
 
 export default async function EditorPage({ params }: EditorPageProps) {
@@ -26,19 +29,22 @@ export default async function EditorPage({ params }: EditorPageProps) {
     redirect(authOptions?.pages?.signIn || "/login")
   }
 
-  const post = await getPostForUser(params.postId, user.id)
+  const collectionBox = await getCollectionBoxesForUser(
+    params.collectionBoxId,
+    user.id
+  )
 
-  if (!post) {
+  if (!collectionBox) {
     notFound()
   }
 
   return (
     <Editor
-      post={{
-        id: post.id,
-        title: post.title,
-        content: post.content,
-        published: post.published,
+      collectionBox={{
+        id: collectionBox.id,
+        title: collectionBox.title,
+        content: collectionBox.content,
+        published: collectionBox.published,
       }}
     />
   )

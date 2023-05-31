@@ -56,7 +56,7 @@ export const docsConfig: DocsConfig = {
           disabled: true,
         },
         {
-          title: "Writing Posts",
+          title: "Creating Collection Boxes",
           href: "/docs/in-progress",
           disabled: true,
         },

@@ -52,10 +52,10 @@ model User {
   createdAt     DateTime  @default(now()) @map(name: "created_at")
   updatedAt     DateTime  @default(now()) @map(name: "updated_at")
 
-  accounts     Account[]
-  sessions     Session[]
-  Post         Post[]
-  Organization Organization[]
+  accounts        Account[]
+  sessions        Session[]
+  collectionBoxes CollectionBox[]
+  organization    Organization?
 
   stripeCustomerId       String?   @unique @map(name: "stripe_customer_id")
   stripeSubscriptionId   String?   @unique @map(name: "stripe_subscription_id")
@@ -74,24 +74,24 @@ model VerificationToken {
   @@map(name: "verification_tokens")
 }
 
-model Post {
+model CollectionBox {
   id        String   @id @default(cuid())
   title     String
   content   Json?
   published Boolean  @default(false)
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @default(now()) @map(name: "updated_at")
-  authorId  String
+  userId    String
 
-  author User @relation(fields: [authorId], references: [id])
+  user User @relation(fields: [userId], references: [id])
 
-  @@map(name: "posts")
+  @@map(name: "collection_boxes")
 }
 
 model Organization {
   id      String @id @default(cuid())
   name    String
-  adminId String
+  adminId String @unique
 
   admin User @relation(fields: [adminId], references: [id])
 }

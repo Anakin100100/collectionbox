@@ -2,7 +2,7 @@
 
 import EditorJS from "@editorjs/editorjs"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Post } from "@prisma/client"
+import { CollectionBox } from "@prisma/client"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import * as React from "react"
@@ -14,18 +14,18 @@ import { Icons } from "@/components/icons"
 import { buttonVariants } from "@/components/ui/button"
 import { toast } from "@/components/ui/use-toast"
 import { cn } from "@/lib/utils"
-import { postPatchSchema } from "@/lib/validations/post"
+import { collectionBoxPatchSchema } from "@/lib/validations/collectionBox"
 import "@/styles/editor.css"
 
 interface EditorProps {
-  post: Pick<Post, "id" | "title" | "content" | "published">
+  collectionBox: Pick<CollectionBox, "id" | "title" | "content" | "published">
 }
 
-type FormData = z.infer<typeof postPatchSchema>
+type FormData = z.infer<typeof collectionBoxPatchSchema>
 
-export function Editor({ post }: EditorProps) {
+export function Editor({ collectionBox }: EditorProps) {
   const { register, handleSubmit } = useForm<FormData>({
-    resolver: zodResolver(postPatchSchema),
+    resolver: zodResolver(collectionBoxPatchSchema),
   })
   const ref = React.useRef<EditorJS>()
   const router = useRouter()
@@ -40,7 +40,7 @@ export function Editor({ post }: EditorProps) {
     const List = (await import("@editorjs/list")).default
     const LinkTool = (await import("@editorjs/link")).default
 
-    const body = postPatchSchema.parse(post)
+    const body = collectionBoxPatchSchema.parse(collectionBox)
 
     if (!ref.current) {
       const editor = new EditorJS({
@@ -48,7 +48,7 @@ export function Editor({ post }: EditorProps) {
         onReady() {
           ref.current = editor
         },
-        placeholder: "Type here to write your post...",
+        placeholder: "Type here to edit your Collection Box...",
         inlineToolbar: true,
         data: body.content,
         tools: {
@@ -60,7 +60,7 @@ export function Editor({ post }: EditorProps) {
         },
       })
     }
-  }, [post])
+  }, [collectionBox])
 
   React.useEffect(() => {
     if (typeof window !== "undefined") {
@@ -84,7 +84,7 @@ export function Editor({ post }: EditorProps) {
 
     const blocks = await ref.current?.save()
 
-    const response = await fetch(`/api/posts/${post.id}`, {
+    const response = await fetch(`/api/collectionboxes/${collectionBox.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -100,7 +100,7 @@ export function Editor({ post }: EditorProps) {
     if (!response?.ok) {
       return toast({
         title: "Something went wrong.",
-        description: "Your post was not saved. Please try again.",
+        description: "Your Collection Box was not saved. Please try again.",
         variant: "destructive",
       })
     }
@@ -108,7 +108,7 @@ export function Editor({ post }: EditorProps) {
     router.refresh()
 
     return toast({
-      description: "Your post has been saved.",
+      description: "Your CollectionBox has been saved.",
     })
   }
 
@@ -131,7 +131,7 @@ export function Editor({ post }: EditorProps) {
               </>
             </Link>
             <p className="text-sm text-muted-foreground">
-              {post.published ? "Published" : "Draft"}
+              {collectionBox.published ? "Published" : "Draft"}
             </p>
           </div>
           <button type="submit" className={cn(buttonVariants())}>
@@ -145,8 +145,8 @@ export function Editor({ post }: EditorProps) {
           <TextareaAutosize
             autoFocus
             id="title"
-            defaultValue={post.title}
-            placeholder="Post title"
+            defaultValue={collectionBox.title}
+            placeholder="Collection Box title"
             className="w-full resize-none appearance-none overflow-hidden bg-transparent text-5xl font-bold focus:outline-none"
             {...register("title")}
           />
