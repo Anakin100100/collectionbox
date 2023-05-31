@@ -19,7 +19,7 @@ export function DashboardNav({ items }: DashboardNavProps) {
   }
 
   return (
-    <nav className="w-full flex justify-between lg:grid lg:items-start lg:gap-2">
+    <nav className="flex w-full justify-between lg:grid lg:items-start lg:gap-2">
       {items.map((item, index) => {
         const Icon = Icons[item.icon || "arrowRight"]
         return (
@@ -33,7 +33,7 @@ export function DashboardNav({ items }: DashboardNavProps) {
                 )}
               >
                 <Icon className="mr-2 h-4 w-4" />
-                <span className="hidden w-0 lg:w-auto lg:visible lg:block">
+                <span className="hidden w-0 lg:visible lg:block lg:w-auto">
                   {item.title}
                 </span>
               </span>
