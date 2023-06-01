@@ -6,3 +6,9 @@ export const collectionBoxPatchSchema = z.object({
   // TODO: Type this properly from editorjs block types?
   content: z.any().optional(),
 })
+
+export const collectionBoxCreateSchema = z.object({
+  title: z.string(),
+  content: z.any().optional(),
+  organizationId: z.string().min(1),
+})

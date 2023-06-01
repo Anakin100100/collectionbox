@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation"
 
-import { CollectionBoxCreateButton } from "@/components/collection-box-create-button"
+import { MemoCollectionBoxCreateForm } from "@/components/collection-box-create-button"
 import { CollectionBoxItem } from "@/components/collection-box-item"
 import { EmptyPlaceholder } from "@/components/empty-placeholder"
 import { DashboardHeader } from "@/components/header"
@@ -41,7 +41,7 @@ export default async function DashboardPage() {
         heading="Collection Boxes"
         text="Create and manage Collection Boxes"
       >
-        <CollectionBoxCreateButton />
+        <MemoCollectionBoxCreateForm />
       </DashboardHeader>
       <div>
         {collectionBoxes?.length ? (
@@ -62,7 +62,6 @@ export default async function DashboardPage() {
             <EmptyPlaceholder.Description>
               You don&apos;t have any Collection Boxes yet.
             </EmptyPlaceholder.Description>
-            <CollectionBoxCreateButton variant="outline" size="xlg" />
           </EmptyPlaceholder>
         )}
       </div>

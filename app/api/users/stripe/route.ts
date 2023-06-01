@@ -4,10 +4,9 @@ import { z } from "zod"
 import { proPlan } from "@/config/subscriptions"
 import { authOptions } from "@/lib/auth"
 import { stripe } from "@/lib/stripe"
-import { getUserSubscriptionPlan } from "@/lib/subscription"
 import { absoluteUrl } from "@/lib/utils"
 
-const billingUrl = absoluteUrl("/dashboard/billing")
+const billingUrl = absoluteUrl("/dashboard")
 
 export async function GET(req: Request) {
   try {
@@ -17,38 +16,34 @@ export async function GET(req: Request) {
       return new Response(null, { status: 403 })
     }
 
-    const subscriptionPlan = await getUserSubscriptionPlan(session.user.id)
-
-    // The user is on the pro plan.
-    // Create a portal session to manage subscription.
-    if (subscriptionPlan.isPro && subscriptionPlan.stripeCustomerId) {
-      const stripeSession = await stripe.billingPortal.sessions.create({
-        customer: subscriptionPlan.stripeCustomerId,
-        return_url: billingUrl,
-      })
-
-      return new Response(JSON.stringify({ url: stripeSession.url }))
-    }
-
-    // The user is on the free plan.
-    // Create a checkout session to upgrade.
-    const stripeSession = await stripe.checkout.sessions.create({
-      success_url: billingUrl,
-      cancel_url: billingUrl,
-      payment_method_types: ["card"],
-      mode: "subscription",
-      billing_address_collection: "auto",
-      customer_email: session.user.email,
-      line_items: [
-        {
-          price: proPlan.stripePriceId,
-          quantity: 1,
+    const stripeSession = await stripe.checkout.sessions.create(
+      {
+        success_url: billingUrl,
+        cancel_url: billingUrl,
+        payment_method_types: ["card"],
+        mode: "payment",
+        billing_address_collection: "auto",
+        customer_email: session.user.email,
+        line_items: [
+          {
+            price_data: {
+              unit_amount: 500,
+              currency: "usd",
+              product_data: {
+                name: "Donation",
+              },
+            },
+            quantity: 1,
+          },
+        ],
+        metadata: {
+          userId: session.user.id,
         },
-      ],
-      metadata: {
-        userId: session.user.id,
       },
-    })
+      {
+        stripeAccount: "{{CONNECTED_ACCOUNT_ID}}",
+      }
+    )
 
     return new Response(JSON.stringify({ url: stripeSession.url }))
   } catch (error) {

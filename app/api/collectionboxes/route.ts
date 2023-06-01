@@ -3,13 +3,7 @@ import * as z from "zod"
 
 import { authOptions } from "@/lib/auth"
 import { db } from "@/lib/db"
-import { RequiresProPlanError } from "@/lib/exceptions"
-import { getUserSubscriptionPlan } from "@/lib/subscription"
-
-const collectionBoxCreateSchema = z.object({
-  title: z.string(),
-  content: z.string().optional(),
-})
+import { collectionBoxCreateSchema } from "@/lib/validations/collectionBox"
 
 export async function GET() {
   try {
@@ -46,23 +40,6 @@ export async function POST(req: Request) {
       return new Response("Unauthorized", { status: 403 })
     }
 
-    const { user } = session
-    const subscriptionPlan = await getUserSubscriptionPlan(user.id)
-
-    // If user is on a free plan.
-    // Check if user has reached limit of 3 Collection Boxes.
-    if (!subscriptionPlan?.isPro) {
-      const count = await db.collectionBox.count({
-        where: {
-          userId: user.id,
-        },
-      })
-
-      if (count >= 3) {
-        throw new RequiresProPlanError()
-      }
-    }
-
     const json = await req.json()
     const body = collectionBoxCreateSchema.parse(json)
 
@@ -71,6 +48,7 @@ export async function POST(req: Request) {
         title: body.title,
         content: body.content,
         userId: session.user.id,
+        organizationId: body.organizationId,
       },
       select: {
         id: true,
@@ -79,12 +57,9 @@ export async function POST(req: Request) {
 
     return new Response(JSON.stringify(collectionBox))
   } catch (error) {
+    console.log(`An error has occured: ${error}`)
     if (error instanceof z.ZodError) {
       return new Response(JSON.stringify(error.issues), { status: 422 })
-    }
-
-    if (error instanceof RequiresProPlanError) {
-      return new Response("Requires Pro Plan", { status: 402 })
     }
 
     return new Response(null, { status: 500 })

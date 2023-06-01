@@ -15,6 +15,7 @@ import { buttonVariants } from "@/components/ui/button"
 import { toast } from "@/components/ui/use-toast"
 import { cn } from "@/lib/utils"
 import { collectionBoxPatchSchema } from "@/lib/validations/collectionBox"
+import { DonationForm } from "./donation-form"
 import "@/styles/editor.css"
 
 interface EditorProps {
@@ -60,6 +61,7 @@ export function Editor({ collectionBox, readonly }: EditorProps) {
           embed: Embed,
         },
         readOnly: readonly,
+        minHeight: 30,
       })
     }
   }, [collectionBox])
@@ -125,38 +127,41 @@ export function Editor({ collectionBox, readonly }: EditorProps) {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="grid w-full gap-10">
+      <div className="container mt-4 grid w-full gap-10">
+        <div className="flex justify-center">
+          <DonationForm />
+        </div>
         <div className="flex w-full items-center justify-between">
-          <div className="flex items-center space-x-10">
-            <>
-              {((readonly) => {
-                if (!readonly) {
-                  return (
-                    <Link
-                      href="/dashboard"
-                      className={cn(buttonVariants({ variant: "ghost" }))}
-                    >
-                      <>
-                        <Icons.chevronLeft className="mr-2 h-4 w-4" />
-                        Back
-                      </>
-                    </Link>
-                  )
-                } else {
-                  return (
-                    <Link
-                      href="/"
-                      className={cn(buttonVariants({ variant: "ghost" }))}
-                    >
-                      <>
-                        <Icons.logo className="mr-2 h-4 w-4" />
-                        CollectionBox
-                      </>
-                    </Link>
-                  )
-                }
-              })(readonly)}
-            </>
+          <div>
+            {((readonly) => {
+              if (!readonly) {
+                return (
+                  <Link
+                    href="/dashboard"
+                    className={cn(buttonVariants({ variant: "ghost" }))}
+                  >
+                    <>
+                      <Icons.chevronLeft className="mr-2 h-4 w-4" />
+                      Back
+                    </>
+                  </Link>
+                )
+              } else {
+                return (
+                  <Link
+                    href="/"
+                    className={cn(buttonVariants({ variant: "ghost" }))}
+                  >
+                    <>
+                      <Icons.logo className="mr-2 h-4 w-4" />
+                      CollectionBox
+                    </>
+                  </Link>
+                )
+              }
+            })(readonly)}
+          </div>
+          <div>
             <p
               className={cn(
                 "text-sm text-muted-foreground",
@@ -166,17 +171,23 @@ export function Editor({ collectionBox, readonly }: EditorProps) {
               {collectionBox.published ? "Published" : "Draft"}
             </p>
           </div>
-          <button
-            type="submit"
-            className={cn(buttonVariants(), componentVisibility)}
-          >
-            {isSaving && (
-              <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-            )}
-            <span>Save</span>
-          </button>
+          <div>
+            <button
+              type="submit"
+              className={cn(
+                buttonVariants({ variant: "ghost" }),
+                componentVisibility
+              )}
+            >
+              {isSaving && (
+                <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+              )}
+              Save
+              <Icons.save className="ml-2 h-4 w-4" />
+            </button>
+          </div>
         </div>
-        <div className="prose prose-stone mx-auto w-[800px] dark:prose-invert">
+        <div className="prose prose-stone mx-auto dark:prose-invert">
           <TextareaAutosize
             autoFocus
             id="title"
@@ -185,14 +196,7 @@ export function Editor({ collectionBox, readonly }: EditorProps) {
             className="w-full resize-none appearance-none overflow-hidden bg-transparent text-5xl font-bold focus:outline-none"
             {...register("title")}
           />
-          <div id="editor" className="min-h-[500px]" />
-          <p className={cn("text-sm text-gray-500", componentVisibility)}>
-            Use{" "}
-            <kbd className="rounded-md border bg-muted px-1 text-xs uppercase">
-              Tab
-            </kbd>{" "}
-            to open the command menu.
-          </p>
+          <div id="editor" />
         </div>
       </div>
     </form>
