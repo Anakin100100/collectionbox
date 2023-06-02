@@ -14,9 +14,11 @@ import {
 } from "@/components/ui/card"
 import { toast } from "@/components/ui/use-toast"
 import { Icons } from "@/components/icons"
+import { Input } from "@/components/ui/input"
 
 export function DonationForm({ className, collectionBoxId, ...props }) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
+  const [ammount, setAmmount] = React.useState<number>(10)
 
   function onSubmit(event) {
     console.log("moving to stripe checkout")
@@ -35,6 +37,7 @@ export function DonationForm({ className, collectionBoxId, ...props }) {
           },
           body: JSON.stringify({
             collectionBoxId: collectionBoxId,
+            ammount: ammount,
           }),
         }
       )
@@ -60,6 +63,30 @@ export function DonationForm({ className, collectionBoxId, ...props }) {
     handleSubmit(event)
   }
 
+  const handleAmmountChange = (event) => {
+    const parsed = parseInt(event.target.value)
+    if (event.target.value === "") {
+      setAmmount(1)
+      return
+    }
+    if (isNaN(parsed)) {
+      return toast({
+        title: "Invalid ammount",
+        description: `${event.target.value} is not a valid number`,
+        variant: "destructive",
+      })
+    }
+    if (parsed < 0) {
+      return toast({
+        title: "Invalid ammount",
+        description: `${event.target.value} must be positive`,
+        variant: "destructive",
+      })
+    }
+
+    setAmmount(parsed)
+  }
+
   return (
     <div className={cn(className, "w-full")}>
       <Card>
@@ -78,17 +105,24 @@ export function DonationForm({ className, collectionBoxId, ...props }) {
           sagittis mauris tellus, non vehicula libero mattis non. Proin non nunc
           rutrum, rutrum massa ut, ullamcorper magna.
         </CardContent>
-        <CardFooter className="flex justify-center">
+        <CardFooter className="flex flex-row justify-center">
+          <div className="mr-2">
+            <Input
+              className="w-14"
+              onChange={handleAmmountChange}
+              value={ammount}
+            />
+          </div>
           <div>
             <button
               onClick={onSubmit}
-              className={cn(buttonVariants(), "text-center")}
+              className={cn(buttonVariants(), "h-10 text-center")}
               disabled={isLoading}
             >
               {isLoading && (
                 <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
               )}
-              Donate 5 USD
+              Donate {ammount} USD
             </button>
           </div>
         </CardFooter>

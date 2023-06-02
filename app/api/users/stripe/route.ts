@@ -11,6 +11,7 @@ const billingUrl = absoluteUrl("/dashboard")
 
 const stripeCheckoutSessionCreateSchema = z.object({
   collectionBoxId: z.string(),
+  ammount: z.number(),
 })
 
 export async function POST(req: Request) {
@@ -42,7 +43,7 @@ export async function POST(req: Request) {
         line_items: [
           {
             price_data: {
-              unit_amount: 500,
+              unit_amount: body.ammount * 100,
               currency: "usd",
               product_data: {
                 name: "Donation",
