@@ -32,28 +32,20 @@ export async function POST(req: Request) {
       },
     })
 
-    const stripeSession = await stripe.checkout.sessions.create(
+    const stripePaymentLink = await stripe.paymentLinks.create(
       {
-        success_url: billingUrl,
-        cancel_url: billingUrl,
         payment_method_types: ["card"],
-        mode: "payment",
         billing_address_collection: "auto",
-        customer_email: session.user.email,
         line_items: [
           {
-            price_data: {
-              unit_amount: body.ammount * 100,
-              currency: "usd",
-              product_data: {
-                name: "Donation",
-              },
-            },
-            quantity: 1,
+            price: "price_1NEUffIoMJBp2968ny9M20U2",
+            quantity: body.ammount,
           },
         ],
+        application_fee_percent: 4,
         metadata: {
           userId: session.user.id,
+          email: session.user.email,
         },
       },
       {
@@ -61,7 +53,7 @@ export async function POST(req: Request) {
       }
     )
 
-    return new Response(JSON.stringify({ url: stripeSession.url }))
+    return new Response(JSON.stringify({ url: stripePaymentLink.url }))
   } catch (error) {
     console.log(`Error has occured: ${error}`)
     if (error instanceof z.ZodError) {
