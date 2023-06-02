@@ -5,5 +5,5 @@ export async function GET() {
     select: { id: true, name: true },
   })
 
-  return new Response(JSON.stringify(organizations))
+  return new Response(JSON.stringify(organizations), { status: 200 })
 }
