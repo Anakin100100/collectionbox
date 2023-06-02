@@ -38,7 +38,7 @@ export async function POST(req: Request) {
         billing_address_collection: "auto",
         line_items: [
           {
-            price: "price_1NEUffIoMJBp2968ny9M20U2",
+            price: "price_1NEUrrIoMJBp2968Aiqkf9QN",
             quantity: body.ammount,
           },
         ],
