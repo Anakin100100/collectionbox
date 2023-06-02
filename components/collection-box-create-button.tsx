@@ -167,7 +167,7 @@ export const MemoCollectionBoxCreateForm = React.memo(
               {
                 "cursor-not-allowed break-normal opacity-60": isLoading,
               },
-              "p-2"
+              "w-full"
             )}
             disabled={isLoading}
             onClick={handleSubmit}
