@@ -129,7 +129,7 @@ export function Editor({ collectionBox, readonly }: EditorProps) {
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="container mt-4 grid w-full gap-10">
         <div className="flex justify-center">
-          <DonationForm />
+          <DonationForm className={""} collectionBoxId={collectionBox.id} />
         </div>
         <div className="flex w-full items-center justify-between">
           <div>

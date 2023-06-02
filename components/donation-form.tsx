@@ -2,8 +2,7 @@
 
 import * as React from "react"
 
-import { UserSubscriptionPlan } from "types"
-import { cn, formatDate } from "@/lib/utils"
+import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import {
   Card,
@@ -16,34 +15,49 @@ import {
 import { toast } from "@/components/ui/use-toast"
 import { Icons } from "@/components/icons"
 
-interface DonationFormProps extends React.HTMLAttributes<HTMLFormElement> {}
-
-export function DonationForm({ className, ...props }: DonationFormProps) {
+export function DonationForm({ className, collectionBoxId, ...props }) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
 
-  async function onSubmit(event) {
-    event.preventDefault()
-    setIsLoading(!isLoading)
+  function onSubmit(event) {
+    console.log("moving to stripe checkout")
 
-    // Get a Stripe session URL.
-    const response = await fetch("/api/users/stripe")
+    const handleSubmit = async (event) => {
+      event.preventDefault()
+      setIsLoading(true)
 
-    if (!response?.ok) {
-      setIsLoading(false)
-      return toast({
-        title: "Something went wrong.",
-        description: "Please refresh the page and try again.",
-        variant: "destructive",
-      })
+      // Get a Stripe session URL.
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_APP_URL}/api/users/stripe`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            collectionBoxId: collectionBoxId,
+          }),
+        }
+      )
+
+      if (!response?.ok) {
+        setIsLoading(false)
+        return toast({
+          title: "Something went wrong.",
+          description: "Please refresh the page and try again.",
+          variant: "destructive",
+        })
+      }
+
+      // Redirect to the Stripe session.
+      // This could be a checkout page for initial upgrade.
+      // Or portal to manage existing subscription.
+      const session = await response.json()
+      if (session) {
+        window.location.href = session.url
+      }
     }
 
-    // Redirect to the Stripe session.
-    // This could be a checkout page for initial upgrade.
-    // Or portal to manage existing subscription.
-    const session = await response.json()
-    if (session) {
-      window.location.href = session.url
-    }
+    handleSubmit(event)
   }
 
   return (
