@@ -31,12 +31,14 @@ import {
   User,
   X,
   Save,
+  Lock,
   type Icon as LucideIcon,
 } from "lucide-react"
 
 export type Icon = LucideIcon
 
 export const Icons = {
+  lock: Lock,
   save: Save,
   collectionBox: PiggyBank,
   organization: Building2,

@@ -55,7 +55,7 @@ export default function ContactPage() {
             </h4>
           </div>
           <Link
-            href="mailto: abc@example.com"
+            href="mailto: pawelbiegun@collectionbox.online"
             className={cn(buttonVariants({ size: "lg" }))}
           >
             Contact us
