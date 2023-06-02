@@ -41,6 +41,9 @@ export function Editor({ collectionBox, readonly }: EditorProps) {
     const Table = (await import("@editorjs/table")).default
     const List = (await import("@editorjs/list")).default
     const LinkTool = (await import("@editorjs/link")).default
+    const QuoteTool = (await import("@editorjs/quote")).default
+    const CheckistTool = (await import("@editorjs/checklist")).default
+    const SimpleImageTool = (await import("@editorjs/simple-image")).default
 
     const body = collectionBoxPatchSchema.parse(collectionBox)
 
@@ -59,6 +62,9 @@ export function Editor({ collectionBox, readonly }: EditorProps) {
           list: List,
           table: Table,
           embed: Embed,
+          quote: QuoteTool,
+          checklist: CheckistTool,
+          image: SimpleImageTool,
         },
         readOnly: readonly,
         minHeight: 30,

@@ -3,12 +3,15 @@ lockfileVersion: 5.3
 specifiers:
   '@commitlint/cli': ^17.6.1
   '@commitlint/config-conventional': ^17.6.1
+  '@editorjs/checklist': ^1.5.0
   '@editorjs/editorjs': ^2.26.5
   '@editorjs/embed': ^2.5.3
   '@editorjs/header': ^2.7.0
   '@editorjs/link': ^2.5.0
   '@editorjs/list': ^1.8.0
   '@editorjs/paragraph': ^2.9.0
+  '@editorjs/quote': ^2.5.0
+  '@editorjs/simple-image': ^1.5.1
   '@editorjs/table': ^2.2.1
   '@hookform/resolvers': ^3.1.0
   '@ianvs/prettier-plugin-sort-imports': ^3.7.2
@@ -103,12 +106,15 @@ specifiers:
   zod: ^3.21.4
 
 dependencies:
+  '@editorjs/checklist': 1.5.0
   '@editorjs/editorjs': 2.27.0
   '@editorjs/embed': 2.5.3
   '@editorjs/header': 2.7.0
   '@editorjs/link': 2.5.0
   '@editorjs/list': 1.8.0
   '@editorjs/paragraph': 2.9.0
+  '@editorjs/quote': 2.5.0
+  '@editorjs/simple-image': 1.5.1
   '@editorjs/table': 2.2.1
   '@hookform/resolvers': 3.1.0_react-hook-form@7.44.1
   '@next-auth/prisma-adapter': 1.0.6_01633d092ea05a8aa2e2930e575ac49b
@@ -431,6 +437,10 @@ packages:
 
   /@codexteam/icons/0.0.6:
     resolution: {integrity: sha512-L7Q5PET8PjKcBT5wp7VR+FCjwCi5PUp7rd/XjsgQ0CI5FJz0DphyHGRILMuDUdCW2MQT9NHbVr4QP31vwAkS/A==}
+    dev: false
+
+  /@codexteam/icons/0.3.0:
+    resolution: {integrity: sha512-fJE9dfFdgq8xU+sbsxjH0Kt8Yeatw9xHBJWb77DhRkEXz3OCoIS6hrRC1ewHEryxzIjxD8IyQrRq2f+Gz3BcmA==}
     dev: false
 
   /@colors/colors/1.5.0:
@@ -764,6 +774,12 @@ packages:
       - supports-color
     dev: true
 
+  /@editorjs/checklist/1.5.0:
+    resolution: {integrity: sha512-2QUKDvLmtOFDaQLX6C+D9A4hIGBhsYwZW+60fOghSwC80dD931zOAA71cf+xppCTEhcr4eT18C6BJkBGf/DjTw==}
+    dependencies:
+      '@codexteam/icons': 0.3.0
+    dev: false
+
   /@editorjs/editorjs/2.27.0:
     resolution: {integrity: sha512-XyPnvu61Ynk4k7R/1gVYUJjrtuf9Tf0A+CZuvp2suW4z5TNHqNjBa9vRdr3ngHzhNSoZvgstrOO3zCVqVTezPg==}
     dev: false
@@ -795,6 +811,18 @@ packages:
     resolution: {integrity: sha512-lI6x1eiqFx2X3KmMak6gBlimFqXhG35fQpXMxzrjIphNLr4uPsXhVbyMPimPoLUnS9rM6Q00vptXmP2QNDd0zg==}
     dependencies:
       '@codexteam/icons': 0.0.4
+    dev: false
+
+  /@editorjs/quote/2.5.0:
+    resolution: {integrity: sha512-24Mu8cESaj34a0kg1Enj7qiZ3yiCOsZI59+8xpfXLO/NkO7hBYWNForVcBy5yIWs/VLlEZK11FP37f/mHrKugQ==}
+    dependencies:
+      '@codexteam/icons': 0.0.5
+    dev: false
+
+  /@editorjs/simple-image/1.5.1:
+    resolution: {integrity: sha512-eXfNzYMOPE7I/HllX00XvEO1MGiFu34lzOIyQzxQ3GdD+GlEJgIN9IhLGN7glsyAhCVmNyxNXGa9kUHzWQ9c5Q==}
+    dependencies:
+      '@codexteam/icons': 0.0.6
     dev: false
 
   /@editorjs/table/2.2.1:
