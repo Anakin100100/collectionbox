@@ -17,6 +17,7 @@ import { cn } from "@/lib/utils"
 import { collectionBoxPatchSchema } from "@/lib/validations/collectionBox"
 import { DonationForm } from "./donation-form"
 import "@/styles/editor.css"
+import InlineImage from "editorjs-inline-image"
 
 interface EditorProps {
   collectionBox: Pick<CollectionBox, "id" | "title" | "content" | "published">
@@ -43,7 +44,6 @@ export function Editor({ collectionBox, readonly }: EditorProps) {
     const LinkTool = (await import("@editorjs/link")).default
     const QuoteTool = (await import("@editorjs/quote")).default
     const CheckistTool = (await import("@editorjs/checklist")).default
-    const SimpleImageTool = (await import("@editorjs/simple-image")).default
 
     const body = collectionBoxPatchSchema.parse(collectionBox)
 
@@ -64,7 +64,19 @@ export function Editor({ collectionBox, readonly }: EditorProps) {
           embed: Embed,
           quote: QuoteTool,
           checklist: CheckistTool,
-          image: SimpleImageTool,
+          image: {
+            class: InlineImage,
+            inlineToolbar: true,
+            config: {
+              embed: {
+                display: true,
+              },
+              unsplash: {
+                appName: "CollectionBox",
+                clientId: "oBLRXxxbBnr0w6Sycn8l198YbkTDRkNFgW0oSZ_e-Ng",
+              },
+            },
+          },
         },
         readOnly: readonly,
         minHeight: 30,
