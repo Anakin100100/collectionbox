@@ -71,7 +71,7 @@ export default async function IndexPage() {
               <div className="space-y-2">
                 <h3 className="font-bold">Trust</h3>
                 <p className="text-sm">
-                  Only verified charities can use CollectionBox
+                  Only verified charities can use CollectionBox.
                 </p>
               </div>
             </div>
@@ -93,7 +93,8 @@ export default async function IndexPage() {
               <div className="space-y-2">
                 <h3 className="font-bold">Ease of use</h3>
                 <p className="text-sm text-muted-foreground">
-                  Our intuitive and modern UI creates a positive user experience
+                  Our intuitive and modern graphic design creates a positive
+                  user experience.
                 </p>
               </div>
             </div>
@@ -151,7 +152,7 @@ export default async function IndexPage() {
                 <h3 className="font-bold">Security</h3>
                 <p className="text-sm text-muted-foreground">
                   The application is secured using Auth.js and uses security
-                  best practices
+                  best practices.
                 </p>
               </div>
             </div>
@@ -164,7 +165,7 @@ export default async function IndexPage() {
               <div className="space-y-2">
                 <h3 className="font-bold">Easy payments</h3>
                 <p className="text-sm text-muted-foreground">
-                  Payments are securely managed end to end using Stripe
+                  Payments are securely managed end to end using Stripe.
                 </p>
               </div>
             </div>
