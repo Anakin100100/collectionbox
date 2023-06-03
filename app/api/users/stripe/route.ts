@@ -58,7 +58,7 @@ export async function POST(req: Request) {
         metadata: {
           userId: session.user.id,
           // @ts-expect-error
-          collectionBoxId: collectionBoxWithOrganization,
+          collectionBoxId: collectionBoxWithOrganization?.id,
         },
       },
       {
@@ -68,7 +68,8 @@ export async function POST(req: Request) {
 
     return new Response(JSON.stringify({ url: stripeSession.url }))
   } catch (error) {
-    console.log(`Error has occured: ${error}`)
+    console.log(`Error has occured`)
+    console.log(error)
     if (error instanceof z.ZodError) {
       return new Response(JSON.stringify(error.issues), { status: 422 })
     }
