@@ -102,12 +102,12 @@ model Organization {
 }
 
 model Donation {
-  id              String @id @default(cuid())
+  id              String  @id @default(cuid())
   ammount         Int
-  userId          String
-  collectionBoxId String @map(name: "collection_box_id")
+  userId          String?
+  collectionBoxId String  @map(name: "collection_box_id")
 
-  user          User          @relation(fields: [userId], references: [id])
+  user          User?         @relation(fields: [userId], references: [id])
   collectionBox CollectionBox @relation(fields: [collectionBoxId], references: [id])
 
   @@map(name: "donations")

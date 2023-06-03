@@ -153,7 +153,14 @@ export function Editor({ collectionBox, readonly }: EditorProps) {
         <div className="flex justify-center">
           <DonationForm className={""} collectionBoxId={collectionBox.id} />
         </div>
-        <div className="flex w-full items-center justify-between">
+        <div
+          className={cn(
+            "flex w-full items-center",
+            componentVisibility === "visible"
+              ? "justify-between"
+              : "justify-center"
+          )}
+        >
           <div>
             {((readonly) => {
               if (!readonly) {
@@ -184,13 +191,6 @@ export function Editor({ collectionBox, readonly }: EditorProps) {
             })(readonly)}
           </div>
           <div>
-            <div>
-              <h1 className="text-2xl font-bold">
-                {"Raised " + collectionBox.totalDonations + " USD"}
-              </h1>
-            </div>
-          </div>
-          <div>
             <button
               type="submit"
               className={cn(
@@ -205,6 +205,13 @@ export function Editor({ collectionBox, readonly }: EditorProps) {
               Save
               <Icons.save className="ml-2 h-4 w-4" />
             </button>
+          </div>
+        </div>
+        <div>
+          <div>
+            <h1 className="text-center text-2xl font-bold">
+              {"Raised " + collectionBox.totalDonations + " USD"}
+            </h1>
           </div>
         </div>
         <div className="prose prose-stone mx-auto dark:prose-invert">

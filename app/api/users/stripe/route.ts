@@ -18,8 +18,13 @@ export async function POST(req: Request) {
   try {
     const session = await getServerSession(authOptions)
 
+    let userId
+    let userEmail
     if (!session?.user || !session?.user.email) {
-      return new Response(null, { status: 403 })
+      userId = "NULL"
+      userEmail = "notprovided@gmail.com"
+    } else {
+      userId = session.user.id
     }
 
     const json = await req.json()
@@ -39,7 +44,7 @@ export async function POST(req: Request) {
         payment_method_types: ["card"],
         mode: "payment",
         billing_address_collection: "auto",
-        customer_email: session.user.email,
+        customer_email: userEmail,
         payment_intent_data: {
           application_fee_amount: body.ammount * 100 * 0.04,
         },
@@ -56,7 +61,7 @@ export async function POST(req: Request) {
           },
         ],
         metadata: {
-          userId: session.user.id,
+          userId: userId,
           // @ts-expect-error
           collectionBoxId: collectionBoxWithOrganization?.id,
         },
