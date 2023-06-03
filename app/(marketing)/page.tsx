@@ -107,7 +107,8 @@ export default async function IndexPage() {
               <div className="space-y-2">
                 <h3 className="font-bold">Customizability</h3>
                 <p className="text-sm text-muted-foreground">
-                  Make your collection box unique using images, videos and text.
+                  Make your collection box unique and visually appealing using
+                  images, videos and text.
                 </p>
               </div>
             </div>
