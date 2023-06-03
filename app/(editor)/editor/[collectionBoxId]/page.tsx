@@ -7,11 +7,16 @@ import { db } from "@/lib/db"
 import { getCurrentUser } from "@/lib/session"
 
 async function getCollectionBoxesForUser(collectionBoxId: CollectionBox["id"]) {
-  return await db.collectionBox.findFirst({
-    where: {
-      id: collectionBoxId,
-    },
-  })
+  const res = await db.$queryRaw<
+    { id: string; content: object; title: string; total_donations: number }[]
+  >`
+      SELECT collection_boxes.id, collection_boxes.content, collection_boxes.title, COALESCE(SUM(donations.ammount), 0) AS total_donations
+      FROM collection_boxes
+      LEFT JOIN donations ON donations.collection_box_id = collection_boxes.id
+      WHERE collection_boxes.id = ${collectionBoxId}
+      GROUP BY collection_boxes.id;
+    `
+  return res[0]
 }
 
 interface EditorPageProps {
@@ -39,7 +44,7 @@ export default async function EditorPage({ params }: EditorPageProps) {
         id: collectionBox.id,
         title: collectionBox.title,
         content: collectionBox.content,
-        published: collectionBox.published,
+        totalDonations: collectionBox.total_donations,
       }}
       readonly={readonly}
     />

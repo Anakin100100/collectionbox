@@ -17,10 +17,13 @@ import { cn } from "@/lib/utils"
 import { collectionBoxPatchSchema } from "@/lib/validations/collectionBox"
 import { DonationForm } from "./donation-form"
 import "@/styles/editor.css"
-import InlineImage from "editorjs-inline-image"
 
 interface EditorProps {
-  collectionBox: Pick<CollectionBox, "id" | "title" | "content" | "published">
+  collectionBox: Pick<
+    CollectionBox,
+    // @ts-expect-error
+    "id" | "title" | "content" | "totalDonations"
+  >
   readonly: boolean
 }
 
@@ -44,6 +47,7 @@ export function Editor({ collectionBox, readonly }: EditorProps) {
     const LinkTool = (await import("@editorjs/link")).default
     const QuoteTool = (await import("@editorjs/quote")).default
     const CheckistTool = (await import("@editorjs/checklist")).default
+    const ImageToolClass = (await import("editorjs-inline-image")).default
 
     const body = collectionBoxPatchSchema.parse(collectionBox)
 
@@ -65,7 +69,7 @@ export function Editor({ collectionBox, readonly }: EditorProps) {
           quote: QuoteTool,
           checklist: CheckistTool,
           image: {
-            class: InlineImage,
+            class: ImageToolClass,
             inlineToolbar: true,
             config: {
               embed: {
@@ -180,21 +184,19 @@ export function Editor({ collectionBox, readonly }: EditorProps) {
             })(readonly)}
           </div>
           <div>
-            <p
-              className={cn(
-                "text-sm text-muted-foreground",
-                componentVisibility
-              )}
-            >
-              {collectionBox.published ? "Published" : "Draft"}
-            </p>
+            <div>
+              <h1 className="text-2xl font-bold">
+                {"Raised " + collectionBox.totalDonations + " USD"}
+              </h1>
+            </div>
           </div>
           <div>
             <button
               type="submit"
               className={cn(
                 buttonVariants({ variant: "ghost" }),
-                componentVisibility
+                componentVisibility,
+                "px-2"
               )}
             >
               {isSaving && (

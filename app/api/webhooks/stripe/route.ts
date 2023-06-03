@@ -25,9 +25,17 @@ export async function POST(req: Request) {
   const session = event.data.object as Stripe.Checkout.Session
 
   if (event.type === "checkout.session.completed") {
-    // Retrieve the subscription details from Stripe.
-    console.log("Processing stripe checkout session")
-    console.log(session)
+    // The data there cannot be null
+    await db.donation.create({
+      data: {
+        // @ts-expect-error
+        userId: session.metadata.userId,
+        // @ts-expect-error
+        collectionBoxId: session.metadata.collectionBoxId,
+        // @ts-expect-error
+        ammount: Math.floor(session.amount_total / 100),
+      },
+    })
   }
 
   return new Response(null, { status: 200 })

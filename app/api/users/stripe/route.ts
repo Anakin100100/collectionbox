@@ -57,6 +57,8 @@ export async function POST(req: Request) {
         ],
         metadata: {
           userId: session.user.id,
+          // @ts-expect-error
+          collectionBoxId: collectionBoxWithOrganization,
         },
       },
       {

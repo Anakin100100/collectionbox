@@ -27,7 +27,6 @@ export default async function DashboardPage() {
     select: {
       id: true,
       title: true,
-      published: true,
       createdAt: true,
     },
     orderBy: {

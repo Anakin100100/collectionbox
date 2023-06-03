@@ -6,7 +6,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { formatDate } from "@/lib/utils"
 
 interface CollectionBoxItemProps {
-  collectionBox: Pick<CollectionBox, "id" | "title" | "published" | "createdAt">
+  collectionBox: Pick<CollectionBox, "id" | "title" | "createdAt">
 }
 
 export function CollectionBoxItem({ collectionBox }: CollectionBoxItemProps) {

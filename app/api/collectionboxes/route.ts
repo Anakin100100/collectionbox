@@ -18,7 +18,6 @@ export async function GET() {
       select: {
         id: true,
         title: true,
-        published: true,
         createdAt: true,
       },
       where: {

@@ -116,7 +116,7 @@ export function DonationForm({ className, collectionBoxId, ...props }) {
           <div>
             <button
               onClick={onSubmit}
-              className={cn(buttonVariants(), "h-10 text-center")}
+              className={cn(buttonVariants(), "h-10 px-2 text-center")}
               disabled={isLoading}
             >
               {isLoading && (

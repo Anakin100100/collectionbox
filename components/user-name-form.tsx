@@ -92,12 +92,7 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
             <Label className="sr-only" htmlFor="name">
               Name
             </Label>
-            <Input
-              id="name"
-              className="w-[400px]"
-              size={32}
-              {...register("name")}
-            />
+            <Input id="name" size={32} {...register("name")} />
             {errors?.name && (
               <p className="px-1 text-xs text-red-600">{errors.name.message}</p>
             )}
@@ -106,7 +101,7 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
         <CardFooter>
           <button
             type="submit"
-            className={cn(buttonVariants(), className)}
+            className={cn(buttonVariants(), className, "w-full")}
             disabled={isSaving}
           >
             {isSaving && (
