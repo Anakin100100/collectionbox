@@ -8,13 +8,27 @@ import { getCurrentUser } from "@/lib/session"
 
 async function getCollectionBoxesForUser(collectionBoxId: CollectionBox["id"]) {
   const res = await db.$queryRaw<
-    { id: string; content: object; title: string; total_donations: number }[]
+    {
+      id: string
+      content: object
+      title: string
+      total_donations: number
+      short_description: string
+      long_description: string
+    }[]
   >`
-      SELECT collection_boxes.id, collection_boxes.content, collection_boxes.title, COALESCE(SUM(donations.ammount), 0) AS total_donations
+      SELECT 
+        collection_boxes.id, 
+        collection_boxes.content, 
+        collection_boxes.title, 
+        COALESCE(SUM(donations.ammount), 0) AS total_donations,
+        organizations.long_description,
+        organizations.short_description
       FROM collection_boxes
       LEFT JOIN donations ON donations.collection_box_id = collection_boxes.id
+      LEFT JOIN organizations ON collection_boxes.organization_id = organizations.id
       WHERE collection_boxes.id = ${collectionBoxId}
-      GROUP BY collection_boxes.id;
+      GROUP BY collection_boxes.id, organizations.long_description, organizations.short_description;
     `
   return res[0]
 }
@@ -45,6 +59,8 @@ export default async function EditorPage({ params }: EditorPageProps) {
         title: collectionBox.title,
         content: collectionBox.content,
         totalDonations: collectionBox.total_donations,
+        shortDescription: collectionBox.short_description,
+        longDescription: collectionBox.long_description,
       }}
       readonly={readonly}
     />

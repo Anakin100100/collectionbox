@@ -16,7 +16,13 @@ import { toast } from "@/components/ui/use-toast"
 import { Icons } from "@/components/icons"
 import { Input } from "@/components/ui/input"
 
-export function DonationForm({ className, collectionBoxId, ...props }) {
+export function DonationForm({
+  className,
+  collectionBoxId,
+  shortDescription,
+  longDescription,
+  ...props
+}) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
   const [ammount, setAmmount] = React.useState<number>(10)
 
@@ -93,18 +99,10 @@ export function DonationForm({ className, collectionBoxId, ...props }) {
         <CardHeader>
           <h1 className="text-center text-2xl">Donate Now</h1>
           <CardDescription className="text-center">
-            Donate now to help starving children
+            {shortDescription}
           </CardDescription>
         </CardHeader>
-        <CardContent className="text-center">
-          Charity description Lorem ipsum dolor sit amet, consectetur adipiscing
-          elit. Donec erat urna, vehicula vitae ornare nec, semper ut eros.
-          Suspendisse potenti. Vestibulum ante ipsum primis in faucibus orci
-          luctus et ultrices posuere cubilia curae; Etiam placerat mauris nec
-          quam semper congue. Morbi laoreet vel mauris in volutpat. Etiam
-          sagittis mauris tellus, non vehicula libero mattis non. Proin non nunc
-          rutrum, rutrum massa ut, ullamcorper magna.
-        </CardContent>
+        <CardContent className="text-center">{longDescription}</CardContent>
         <CardFooter className="flex flex-row justify-center">
           <div className="mr-2">
             <Input

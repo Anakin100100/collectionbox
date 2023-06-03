@@ -82,7 +82,7 @@ model CollectionBox {
   createdAt      DateTime @default(now()) @map(name: "created_at")
   updatedAt      DateTime @default(now()) @map(name: "updated_at")
   userId         String
-  organizationId String
+  organizationId String   @map(name: "organization_id")
 
   user         User         @relation(fields: [userId], references: [id])
   organization Organization @relation(fields: [organizationId], references: [id])
@@ -92,13 +92,17 @@ model CollectionBox {
 }
 
 model Organization {
-  id       String @id @default(cuid())
-  name     String
-  adminId  String @unique
-  stripeId String @unique
+  id                String @id @default(cuid())
+  name              String
+  adminId           String @unique
+  stripeId          String @unique
+  short_description String @default("")
+  long_description  String @default("")
 
   admin         User            @relation(fields: [adminId], references: [id])
   CollectionBox CollectionBox[]
+
+  @@map(name: "organizations")
 }
 
 model Donation {

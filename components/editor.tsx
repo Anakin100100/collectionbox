@@ -22,7 +22,12 @@ interface EditorProps {
   collectionBox: Pick<
     CollectionBox,
     // @ts-expect-error
-    "id" | "title" | "content" | "totalDonations"
+    | "id"
+    | "title"
+    | "content"
+    | "totalDonations"
+    | "shortDescription"
+    | "longDescription"
   >
   readonly: boolean
 }
@@ -151,7 +156,12 @@ export function Editor({ collectionBox, readonly }: EditorProps) {
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="container mt-4 grid w-full gap-10">
         <div className="flex justify-center">
-          <DonationForm className={""} collectionBoxId={collectionBox.id} />
+          <DonationForm
+            className={""}
+            collectionBoxId={collectionBox.id}
+            shortDescription={collectionBox.shortDescription}
+            longDescription={collectionBox.longDescription}
+          />
         </div>
         <div
           className={cn(
