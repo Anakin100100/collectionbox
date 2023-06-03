@@ -5,5 +5,11 @@ export async function GET() {
     select: { id: true, name: true },
   })
 
-  return new Response(JSON.stringify(organizations), { status: 200 })
+  const headers = new Headers({
+    "Cache-Control": "no-cache",
+  })
+  return new Response(JSON.stringify(organizations), {
+    status: 200,
+    headers: headers,
+  })
 }
