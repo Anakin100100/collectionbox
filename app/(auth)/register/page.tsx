@@ -36,23 +36,6 @@ export default function RegisterPage() {
           </p>
         </div>
         <UserAuthForm page="Sign Up" />
-        <p className="px-8 text-center text-sm text-muted-foreground">
-          By registering an account, you agree to our{" "}
-          <Link
-            href="/terms"
-            className="hover:text-brand underline underline-offset-4"
-          >
-            Terms of Service
-          </Link>{" "}
-          and{" "}
-          <Link
-            href="/privacy"
-            className="hover:text-brand underline underline-offset-4"
-          >
-            Privacy Policy
-          </Link>
-          .
-        </p>
       </div>
     </div>
   )
