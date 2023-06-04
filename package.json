@@ -63,6 +63,7 @@
     "date-fns": "^2.29.3",
     "editorjs-html": "^3.4.2",
     "editorjs-inline-image": "^1.2.4",
+    "editorjs-text-color-plugin": "^2.0.2",
     "lucide-react": "^0.92.0",
     "next": "13.4.3",
     "next-auth": "4.22.1",

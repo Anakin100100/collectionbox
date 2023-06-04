@@ -24,14 +24,33 @@ export function DonationForm({
   ...props
 }) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
-  const [ammount, setAmmount] = React.useState<number>(10)
+  const [ammount, setAmmount] = React.useState<string>("10")
 
   function onSubmit(event) {
     console.log("moving to stripe checkout")
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = async () => {
       event.preventDefault()
       setIsLoading(true)
+
+      const parsed = Number(ammount)
+
+      if (isNaN(parsed)) {
+        setIsLoading(false)
+        return toast({
+          title: "Invalid ammount",
+          description: `${ammount} is not a valid number`,
+          variant: "destructive",
+        })
+      }
+      if (parsed <= 1) {
+        setIsLoading(false)
+        return toast({
+          title: "Invalid ammount",
+          description: `${ammount} must be more than 1 usd`,
+          variant: "destructive",
+        })
+      }
 
       // Get a Stripe session URL.
       const response = await fetch(
@@ -43,7 +62,7 @@ export function DonationForm({
           },
           body: JSON.stringify({
             collectionBoxId: collectionBoxId,
-            ammount: ammount,
+            ammount: parsed,
           }),
         }
       )
@@ -66,31 +85,7 @@ export function DonationForm({
       }
     }
 
-    handleSubmit(event)
-  }
-
-  const handleAmmountChange = (event) => {
-    const parsed = parseInt(event.target.value)
-    if (event.target.value === "") {
-      setAmmount(1)
-      return
-    }
-    if (isNaN(parsed)) {
-      return toast({
-        title: "Invalid ammount",
-        description: `${event.target.value} is not a valid number`,
-        variant: "destructive",
-      })
-    }
-    if (parsed < 0) {
-      return toast({
-        title: "Invalid ammount",
-        description: `${event.target.value} must be positive`,
-        variant: "destructive",
-      })
-    }
-
-    setAmmount(parsed)
+    handleSubmit()
   }
 
   return (
@@ -107,7 +102,9 @@ export function DonationForm({
           <div className="mr-2">
             <Input
               className="w-14"
-              onChange={handleAmmountChange}
+              onChange={(event) => {
+                setAmmount(event.target.value)
+              }}
               value={ammount}
             />
           </div>

@@ -63,6 +63,7 @@ specifiers:
   date-fns: ^2.29.3
   editorjs-html: ^3.4.2
   editorjs-inline-image: ^1.2.4
+  editorjs-text-color-plugin: ^2.0.2
   eslint: ^8.39.0
   eslint-config-next: 13.4.4
   eslint-config-prettier: ^8.8.0
@@ -156,6 +157,7 @@ dependencies:
   date-fns: 2.30.0
   editorjs-html: 3.4.2
   editorjs-inline-image: 1.2.4
+  editorjs-text-color-plugin: 2.0.2
   lucide-react: 0.92.0_prop-types@15.8.1+react@18.2.0
   next: 13.4.3_react-dom@18.2.0+react@18.2.0
   next-auth: 4.22.1_d6e7b73ebdce49772563688d1f8438b4
@@ -4643,6 +4645,10 @@ packages:
       intrinsic-scale: 3.0.4
     transitivePeerDependencies:
       - debug
+    dev: false
+
+  /editorjs-text-color-plugin/2.0.2:
+    resolution: {integrity: sha512-umiv8Yc4NjEg1O5dJFDjOQQ31mLKCdTSdVHVuPNmOKdbl+OIi5/DB9P1SRG+zr+sTV0QHWa8x0hZbyqY92DPhw==}
     dev: false
 
   /electron-to-chromium/1.4.411:

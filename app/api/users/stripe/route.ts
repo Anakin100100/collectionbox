@@ -45,9 +45,9 @@ export async function POST(req: Request) {
         mode: "payment",
         billing_address_collection: "auto",
         customer_email: userEmail,
-        payment_intent_data: {
-          application_fee_amount: body.ammount * 100 * 0.04,
-        },
+        //payment_intent_data: {
+        //  application_fee_amount: body.ammount * 100 * 0.04,
+        //},
         line_items: [
           {
             price_data: {
