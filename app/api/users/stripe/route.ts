@@ -20,11 +20,13 @@ export async function POST(req: Request) {
 
     let userId
     let userEmail
+
     if (!session?.user || !session?.user.email) {
       userId = "NULL"
       userEmail = "notprovided@gmail.com"
     } else {
       userId = session.user.id
+      userEmail = session.user.email
     }
 
     const json = await req.json()
