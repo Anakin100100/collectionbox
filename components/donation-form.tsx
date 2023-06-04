@@ -21,6 +21,7 @@ export function DonationForm({
   collectionBoxId,
   shortDescription,
   longDescription,
+  organizationName,
   ...props
 }) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
@@ -92,7 +93,7 @@ export function DonationForm({
     <div className={cn(className, "w-full")}>
       <Card>
         <CardHeader>
-          <h1 className="text-center text-2xl">Donate Now</h1>
+          <h1 className="text-center text-2xl">{organizationName}</h1>
           <CardDescription className="text-center">
             {shortDescription}
           </CardDescription>

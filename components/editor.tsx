@@ -28,6 +28,7 @@ interface EditorProps {
     | "totalDonations"
     | "shortDescription"
     | "longDescription"
+    | "organizationName"
   >
   readonly: boolean
 }
@@ -49,7 +50,6 @@ export function Editor({ collectionBox, readonly }: EditorProps) {
     const Embed = (await import("@editorjs/embed")).default
     const Table = (await import("@editorjs/table")).default
     const List = (await import("@editorjs/list")).default
-    const LinkTool = (await import("@editorjs/link")).default
     const QuoteTool = (await import("@editorjs/quote")).default
     const CheckistTool = (await import("@editorjs/checklist")).default
     const ImageToolClass = (await import("editorjs-inline-image")).default
@@ -68,7 +68,6 @@ export function Editor({ collectionBox, readonly }: EditorProps) {
         data: body.content,
         tools: {
           header: Header,
-          linkTool: LinkTool,
           list: List,
           table: Table,
           embed: Embed,
@@ -191,6 +190,7 @@ export function Editor({ collectionBox, readonly }: EditorProps) {
             collectionBoxId={collectionBox.id}
             shortDescription={collectionBox.shortDescription}
             longDescription={collectionBox.longDescription}
+            organizationName={collectionBox.organizationName}
           />
         </div>
         <div
@@ -259,6 +259,7 @@ export function Editor({ collectionBox, readonly }: EditorProps) {
             autoFocus
             id="title"
             defaultValue={collectionBox.title}
+            disabled={componentVisibility === "visible" ? false : true}
             placeholder="Collection Box title"
             className="w-full resize-none appearance-none overflow-hidden bg-transparent text-5xl font-bold focus:outline-none"
             {...register("title")}

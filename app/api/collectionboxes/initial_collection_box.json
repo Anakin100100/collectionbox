@@ -1,0 +1,128 @@
+{
+  "blocks": [
+    {
+      "data": {
+        "level": 2,
+        "text": "Remember to save the project as you write! (I'm writing this tutorial a second time)"
+      },
+      "id": "t9_A9_1Kab",
+      "type": "header"
+    },
+    {
+      "data": {
+        "text": "When creating your own collection box you can let your imagination loose. This is your canvas. You can <i>italicize</i>&nbsp;or <b>embolden</b>&nbsp;the text. <mark style=\"background-color: rgb(255, 19, 0);\">There</mark> <mark style=\"background-color: rgb(255, 191, 0);\">are</mark> <mark style=\"background-color: rgb(205, 220, 57);\">multiple</mark> <mark style=\"background-color: rgb(63, 81, 181);\">highlighters</mark> <mark style=\"background-color: rgb(121, 85, 72);\">available</mark>&nbsp;<span style=\"color: rgb(68, 64, 60); font-family: __Inter_0ec1f4, __Inter_Fallback_0ec1f4, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, &quot;Noto Sans&quot;, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(121, 85, 72); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;\"></span><span style=\"color: rgb(68, 64, 60); font-family: __Inter_0ec1f4, __Inter_Fallback_0ec1f4, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, &quot;Noto Sans&quot;, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(205, 220, 57); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;\"></span><mark style=\"background-color: rgb(139, 195, 74);\">as</mark> <mark style=\"background-color: rgb(158, 158, 158);\">well</mark>. To do so highlight the text and choose the marker tool"
+      },
+      "id": "Qp8l2FrUb7",
+      "type": "paragraph"
+    },
+    {
+      "data": {
+        "text": "You can add a beautiful <a href=\"https://en.wikipedia.org/wiki/Charity_(practice)\">link</a> to your collection box by first writing the word that will have the link, then highlight it and click the link icon above it.&nbsp;"
+      },
+      "id": "XX0nBEP57P",
+      "type": "paragraph"
+    },
+    {
+      "data": {
+        "text": "A few things to make your collection box attract more donations"
+      },
+      "id": "9F3_APTPSW",
+      "type": "paragraph"
+    },
+    {
+      "data": {
+        "items": [
+          "Write personally about why this particular charity appeals to you.",
+          "Make use of highlights, photos, lists, tables etc. The website design is quite minimalistic so you can make your collection box stand out.&nbsp;",
+          "Include stories about particular people/families that the charity of your choice has helped. This will allow the reader to better visualize the impact of their donation."
+        ],
+        "style": "ordered"
+      },
+      "id": "h7Rlu-O0GN",
+      "type": "list"
+    },
+    {
+      "data": {
+        "text": "A table can be useful to show some data (it loads <b>a lot</b>&nbsp;faster than a photo)"
+      },
+      "id": "w7h6y-102C",
+      "type": "paragraph"
+    },
+    {
+      "data": {
+        "content": [
+          ["Team/Score After Game&nbsp;", "1", "2", "3"],
+          ["Red", "3", "3", "6"],
+          ["Blue", "0", "0", "3"],
+          ["Green", "3", "3", "3"]
+        ],
+        "withHeadings": false
+      },
+      "id": "tA11O-Uvz_",
+      "type": "table"
+    },
+    {
+      "data": {
+        "text": "An inspiring and relevant quote can make a significant decision on the potential donors decision"
+      },
+      "id": "Hr2IOkdbg0",
+      "type": "paragraph"
+    },
+    {
+      "data": {
+        "alignment": "left",
+        "caption": "Israelmore Ayivor",
+        "text": "Giving does not only precede receiving; it is the reason for it. It is in giving that we receive."
+      },
+      "id": "srHOpAkM_s",
+      "type": "quote"
+    },
+    {
+      "data": {
+        "text": "Checklists can show things that were already completed by the charity and show what they need funds to accomplish."
+      },
+      "id": "fNHe6IGyU3",
+      "type": "paragraph"
+    },
+    {
+      "data": {
+        "items": [
+          { "checked": true, "text": "Create a collection box" },
+          {
+            "checked": false,
+            "text": "Create the most beautiful and persuasive collection box I can imagine (I believe in you :)"
+          }
+        ]
+      },
+      "id": "fPlDN4UaRF",
+      "type": "checklist"
+    },
+    {
+      "data": {
+        "text": "Images that <b>show</b>&nbsp;the readers how the charity impacts peoples lives are a good idea. Don't include too many images or use too high quality (640x480 is perfectly fine) because they will take a lot of time to load which can make readers leave before the website finishes loading. The Unsplash images may not work until my app gets approval for higher usage.&nbsp;"
+      },
+      "id": "K2dpQ71QyA",
+      "type": "paragraph"
+    },
+    {
+      "data": {
+        "text": "There are some limitations on where your images can be hosted because they need to be available publicly without any intermediate steps. For example hosting them on Google Drive doesn't work. I verified that hosting them on <a href=\"https://imgur.com/\">Imgur</a> works fine. After uploading the photo to Imgur you can grab the link by clicking on the image <b>in your gallery&nbsp;</b>with right mouse button and clicking the \"copy image address\" button."
+      },
+      "id": "T0R66IWFqG",
+      "type": "paragraph"
+    },
+    {
+      "data": {
+        "caption": "Take a look at this cat!",
+        "stretched": false,
+        "url": "https://i.imgur.com/YqVXTsT.jpeg",
+        "withBackground": false,
+        "withBorder": false
+      },
+      "id": "HcCvxB7pP-",
+      "type": "image"
+    }
+  ],
+  "time": 1685890861504,
+  "version": "2.27.0"
+}

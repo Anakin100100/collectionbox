@@ -15,6 +15,7 @@ async function getCollectionBoxesForUser(collectionBoxId: CollectionBox["id"]) {
       total_donations: number
       short_description: string
       long_description: string
+      organization_name: string
     }[]
   >`
       SELECT 
@@ -23,12 +24,13 @@ async function getCollectionBoxesForUser(collectionBoxId: CollectionBox["id"]) {
         collection_boxes.title, 
         COALESCE(SUM(donations.ammount), 0) AS total_donations,
         organizations.long_description,
-        organizations.short_description
+        organizations.short_description,
+        organizations.name AS organization_name
       FROM collection_boxes
       LEFT JOIN donations ON donations.collection_box_id = collection_boxes.id
       LEFT JOIN organizations ON collection_boxes.organization_id = organizations.id
       WHERE collection_boxes.id = ${collectionBoxId}
-      GROUP BY collection_boxes.id, organizations.long_description, organizations.short_description;
+      GROUP BY collection_boxes.id, organizations.long_description, organizations.short_description, organization_name;
     `
   return res[0]
 }
@@ -61,6 +63,7 @@ export default async function EditorPage({ params }: EditorPageProps) {
         totalDonations: collectionBox.total_donations,
         shortDescription: collectionBox.short_description,
         longDescription: collectionBox.long_description,
+        organizationName: collectionBox.organization_name,
       }}
       readonly={readonly}
     />

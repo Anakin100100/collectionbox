@@ -5,6 +5,8 @@ import { authOptions } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { collectionBoxCreateSchema } from "@/lib/validations/collectionBox"
 
+const initial_collection_box = require("./initial_collection_box.json")
+
 export async function GET() {
   try {
     const session = await getServerSession(authOptions)
@@ -45,7 +47,7 @@ export async function POST(req: Request) {
     const collectionBox = await db.collectionBox.create({
       data: {
         title: body.title,
-        content: body.content,
+        content: initial_collection_box,
         userId: session.user.id,
         organizationId: body.organizationId,
       },
