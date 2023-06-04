@@ -24,27 +24,27 @@ export default function ContactPage() {
           <ul className="grid items-center gap-3 text-sm text-muted-foreground sm:grid-cols-2">
             <li className="flex items-center">
               <Icons.email className="mr-2 h-4 w-4" />
-              someemail@collectionbox.online
+              pawelbiegun@collectionbox.online
             </li>
             <li className="flex items-center">
               <Icons.phoneNumber className="mr-2 h-4 w-4" />
-              some phone number
+              +48 661 657 642
             </li>
             <li className="flex items-center">
               <Icons.address className="mr-2 h-4 w-4" />
-              some address
+              Makowa 19 Żywiec 34-300 Poland
             </li>
             <li className="flex items-center">
               <Icons.linkedin className="mr-2 h-4 w-4" />
-              linkedin account
+              coming soon
             </li>
             <li className="flex items-center">
               <Icons.facebook className="mr-2 h-4 w-4" />
-              facebook account
+              coming soon
             </li>
             <li className="flex items-center">
               <Icons.instagram className="mr-2 h-4 w-4" />
-              an instagram account
+              coming soon
             </li>
           </ul>
         </div>
