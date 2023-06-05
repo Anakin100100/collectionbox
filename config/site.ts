@@ -3,6 +3,6 @@ import { SiteConfig } from "types"
 export const siteConfig: SiteConfig = {
   name: "CollectionBox",
   description:
-    "SAAS that allows charitable organizations to raise money in novel ways",
-  url: "https://collectionbox.vercel.app",
+    "Platform that allows charitable organizations to raise money using extremely customizable collection boxes",
+  url: "https://collectionbox.online",
 }
