@@ -32,12 +32,14 @@ import {
   X,
   Save,
   Lock,
+  Link2,
   type Icon as LucideIcon,
 } from "lucide-react"
 
 export type Icon = LucideIcon
 
 export const Icons = {
+  link: Link2,
   lock: Lock,
   save: Save,
   collectionBox: PiggyBank,

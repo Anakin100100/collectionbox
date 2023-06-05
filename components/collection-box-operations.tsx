@@ -65,6 +65,21 @@ export function CollectionBoxOperations({
               Edit
             </Link>
           </DropdownMenuItem>
+          <DropdownMenuItem>
+            <button
+              className="flex w-full"
+              onClick={() => {
+                navigator.clipboard.writeText(
+                  `${process.env.NEXT_PUBLIC_APP_URL}/editor/${collectionBox.id}`
+                )
+                toast({
+                  description: "Collection box url copied to clipboard",
+                })
+              }}
+            >
+              Share
+            </button>
+          </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem
             className="flex cursor-pointer items-center text-destructive focus:text-destructive"

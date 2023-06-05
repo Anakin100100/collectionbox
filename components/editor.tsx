@@ -175,81 +175,86 @@ export function Editor({ collectionBox, readonly }: EditorProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="container mt-4 grid w-full gap-4">
-        <div className="flex justify-center">
-          <DonationForm
-            className={""}
-            collectionBoxId={collectionBox.id}
-            description={collectionBox.description}
-            organizationName={collectionBox.organizationName}
-          />
-        </div>
-        <div
-          className={cn(
-            "flex w-full items-center",
-            componentVisibility === "visible"
-              ? "justify-between"
-              : "justify-center"
-          )}
-        >
-          <div>
-            {((readonly) => {
-              if (!readonly) {
-                return (
-                  <Link
-                    href="/dashboard"
-                    className={cn(buttonVariants({ variant: "ghost" }))}
-                  >
-                    <>
-                      <Icons.chevronLeft className="mr-2 h-4 w-4" />
-                      Back
-                    </>
-                  </Link>
-                )
-              } else {
-                return (
-                  <Link
-                    href="/"
-                    className={cn(buttonVariants({ variant: "ghost" }))}
-                  >
-                    <>
-                      <Icons.logo className="mr-2 h-4 w-4" />
-                      CollectionBox
-                    </>
-                  </Link>
-                )
-              }
-            })(readonly)}
-          </div>
-          <div>
-            <button
-              type="submit"
-              className={cn(
-                buttonVariants({ variant: "ghost" }),
-                componentVisibility,
-                "px-2"
-              )}
-            >
-              {isSaving && (
-                <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-              )}
-              Save
-              <Icons.save className="ml-2 h-4 w-4" />
-            </button>
-          </div>
-        </div>
+    <div className="container mt-4 grid w-full gap-4">
+      <div className="flex justify-center">
+        <DonationForm
+          className={""}
+          collectionBoxId={collectionBox.id}
+          description={collectionBox.description}
+          organizationName={collectionBox.organizationName}
+        />
+      </div>
+      <div className="flex w-full items-center justify-between">
         <div>
-          <div>
-            <h1 className="text-center text-2xl font-bold">
-              {`Raised ${collectionBox.totalDonations} USD`}
-            </h1>
-          </div>
+          {((readonly) => {
+            if (!readonly) {
+              return (
+                <Link
+                  href="/dashboard"
+                  className={cn(buttonVariants({ variant: "ghost" }))}
+                >
+                  <>
+                    <Icons.chevronLeft className="mr-2 h-4 w-4" />
+                    Back
+                  </>
+                </Link>
+              )
+            } else {
+              return (
+                <Link
+                  href="/"
+                  className={cn(buttonVariants({ variant: "ghost" }))}
+                >
+                  <>
+                    <Icons.logo className="mr-2 h-4 w-4" />
+                    CollectionBox
+                  </>
+                </Link>
+              )
+            }
+          })(readonly)}
         </div>
-        <div className="prose prose-stone mx-auto dark:prose-invert">
-          <div id="editor" />
+        <div className="flex-row space-x-2">
+          <button
+            onClick={handleSubmit(onSubmit)}
+            className={cn(
+              buttonVariants({ variant: "ghost" }),
+              componentVisibility,
+              "px-2"
+            )}
+          >
+            {isSaving && (
+              <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+            )}
+            Save
+            <Icons.save className="ml-2 h-4 w-4" />
+          </button>
+          <button
+            className={cn(buttonVariants({ variant: "ghost" }), "px-2")}
+            onClick={() => {
+              navigator.clipboard.writeText(
+                `${process.env.NEXT_PUBLIC_APP_URL}/editor/${collectionBox.id}`
+              )
+              toast({
+                description: "Collection box url copied to clipboard",
+              })
+            }}
+          >
+            Share
+            <Icons.link className="ml-2 h-4 w-4" />
+          </button>
         </div>
       </div>
-    </form>
+      <div>
+        <div>
+          <h1 className="text-center text-2xl font-bold">
+            {`Raised ${collectionBox.totalDonations} USD`}
+          </h1>
+        </div>
+      </div>
+      <div className="prose prose-stone mx-auto dark:prose-invert">
+        <div id="editor" />
+      </div>
+    </div>
   )
 }
