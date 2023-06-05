@@ -6,10 +6,14 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { formatDate } from "@/lib/utils"
 
 interface CollectionBoxItemProps {
-  collectionBox: Pick<CollectionBox, "id" | "title" | "createdAt">
+  collectionBox: Pick<CollectionBox, "id" | "createdAt" | "sillyName">
+  organizationName: string
 }
 
-export function CollectionBoxItem({ collectionBox }: CollectionBoxItemProps) {
+export function CollectionBoxItem({
+  collectionBox,
+  organizationName,
+}: CollectionBoxItemProps) {
   return (
     <div className="flex items-center justify-between p-4">
       <div className="grid gap-1">
@@ -17,17 +21,17 @@ export function CollectionBoxItem({ collectionBox }: CollectionBoxItemProps) {
           href={`/editor/${collectionBox.id}`}
           className="font-semibold hover:underline"
         >
-          {collectionBox.title}
+          {collectionBox.sillyName}
         </Link>
         <div>
           <p className="text-sm text-muted-foreground">
-            {formatDate(collectionBox.createdAt?.toDateString())}
+            {`${organizationName}, created on: ${formatDate(
+              collectionBox.createdAt?.toDateString()
+            )}`}
           </p>
         </div>
       </div>
-      <CollectionBoxOperations
-        collectionBox={{ id: collectionBox.id, title: collectionBox.title }}
-      />
+      <CollectionBoxOperations collectionBox={{ id: collectionBox.id }} />
     </div>
   )
 }

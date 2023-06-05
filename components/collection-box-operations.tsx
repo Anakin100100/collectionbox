@@ -42,7 +42,7 @@ async function deleteCollectionBox(collectionBoxId: string) {
 }
 
 interface CollectionBoxOperationsProps {
-  collectionBox: Pick<CollectionBox, "id" | "title">
+  collectionBox: Pick<CollectionBox, "id">
 }
 
 export function CollectionBoxOperations({

@@ -81,7 +81,6 @@ export const MemoCollectionBoxCreateForm = React.memo(
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            title: "Untitled Collection Box",
             organizationId: value.id,
           }),
         })

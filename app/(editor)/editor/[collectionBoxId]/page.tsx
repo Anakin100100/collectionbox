@@ -1,8 +1,7 @@
-import { CollectionBox, User } from "@prisma/client"
-import { notFound, redirect } from "next/navigation"
+import { CollectionBox } from "@prisma/client"
+import { notFound } from "next/navigation"
 
 import { Editor } from "@/components/editor"
-import { authOptions } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { getCurrentUser } from "@/lib/session"
 
@@ -11,7 +10,6 @@ async function getCollectionBoxesForUser(collectionBoxId: CollectionBox["id"]) {
     {
       id: string
       content: object
-      title: string
       total_donations: number
       short_description: string
       long_description: string
@@ -21,7 +19,6 @@ async function getCollectionBoxesForUser(collectionBoxId: CollectionBox["id"]) {
       SELECT 
         collection_boxes.id, 
         collection_boxes.content, 
-        collection_boxes.title, 
         COALESCE(SUM(donations.ammount), 0) AS total_donations,
         organizations.long_description,
         organizations.short_description,
@@ -58,7 +55,6 @@ export default async function EditorPage({ params }: EditorPageProps) {
     <Editor
       collectionBox={{
         id: collectionBox.id,
-        title: collectionBox.title,
         content: collectionBox.content,
         totalDonations: collectionBox.total_donations,
         shortDescription: collectionBox.short_description,

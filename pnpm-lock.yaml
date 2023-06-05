@@ -103,6 +103,7 @@ specifiers:
   tailwindcss: ^3.3.1
   tailwindcss-animate: ^1.0.5
   typescript: 4.7.4
+  unique-names-generator: ^4.7.1
   unist-util-visit: ^4.1.2
   zod: ^3.21.4
 
@@ -176,6 +177,7 @@ dependencies:
   stripe: 11.18.0
   tailwind-merge: 1.12.0
   tailwindcss-animate: 1.0.5_tailwindcss@3.3.2
+  unique-names-generator: 4.7.1
   zod: 3.21.4
 
 devDependencies:
@@ -9181,6 +9183,11 @@ packages:
       is-plain-obj: 4.1.0
       trough: 2.1.0
       vfile: 5.3.7
+
+  /unique-names-generator/4.7.1:
+    resolution: {integrity: sha512-lMx9dX+KRmG8sq6gulYYpKWZc9RlGsgBR6aoO8Qsm3qvkSJ+3rAymr+TnV8EDMrIrwuFJ4kruzMWM/OpYzPoow==}
+    engines: {node: '>=8'}
+    dev: false
 
   /unist-util-generated/2.0.1:
     resolution: {integrity: sha512-qF72kLmPxAw0oN2fwpWIqbXAVyEqUzDHMsbtPvOudIlUzXYFIeQIuxXQCRCFh22B7cixvU0MG7m3MW8FTq/S+A==}

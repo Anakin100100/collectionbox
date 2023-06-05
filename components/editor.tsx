@@ -23,7 +23,6 @@ interface EditorProps {
     CollectionBox,
     // @ts-expect-error
     | "id"
-    | "title"
     | "content"
     | "totalDonations"
     | "shortDescription"
@@ -150,7 +149,6 @@ export function Editor({ collectionBox, readonly }: EditorProps) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        title: data.title,
         content: blocks,
       }),
     })
@@ -183,7 +181,7 @@ export function Editor({ collectionBox, readonly }: EditorProps) {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="container mt-4 grid w-full gap-10">
+      <div className="container mt-4 grid w-full gap-4">
         <div className="flex justify-center">
           <DonationForm
             className={""}
@@ -250,20 +248,11 @@ export function Editor({ collectionBox, readonly }: EditorProps) {
         <div>
           <div>
             <h1 className="text-center text-2xl font-bold">
-              {"Raised " + collectionBox.totalDonations + " USD"}
+              {`Raised ${collectionBox.totalDonations} USD`}
             </h1>
           </div>
         </div>
         <div className="prose prose-stone mx-auto dark:prose-invert">
-          <TextareaAutosize
-            autoFocus
-            id="title"
-            defaultValue={collectionBox.title}
-            disabled={componentVisibility === "visible" ? false : true}
-            placeholder="Collection Box title"
-            className="w-full resize-none appearance-none overflow-hidden bg-transparent text-5xl font-bold focus:outline-none"
-            {...register("title")}
-          />
           <div id="editor" />
         </div>
       </div>

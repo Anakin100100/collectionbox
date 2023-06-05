@@ -72,8 +72,8 @@ model VerificationToken {
 
 model CollectionBox {
   id             String   @id @default(cuid())
-  title          String
   content        Json?
+  sillyName      String   @default("Collection Box") @map(name: "silly_name")
   createdAt      DateTime @default(now()) @map(name: "created_at")
   updatedAt      DateTime @default(now()) @map(name: "updated_at")
   userId         String

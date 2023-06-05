@@ -69,7 +69,6 @@ export async function PATCH(
         id: params.collectionBoxId,
       },
       data: {
-        title: body.title,
         content: body.content,
       },
     })

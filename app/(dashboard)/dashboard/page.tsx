@@ -26,8 +26,13 @@ export default async function DashboardPage() {
     },
     select: {
       id: true,
-      title: true,
       createdAt: true,
+      sillyName: true,
+      organization: {
+        select: {
+          name: true,
+        },
+      },
     },
     orderBy: {
       updatedAt: "desc",
@@ -49,6 +54,7 @@ export default async function DashboardPage() {
               <CollectionBoxItem
                 key={collectionBox.id}
                 collectionBox={collectionBox}
+                organizationName={collectionBox.organization.name}
               />
             ))}
           </div>

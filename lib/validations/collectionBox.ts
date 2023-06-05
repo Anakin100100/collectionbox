@@ -8,7 +8,6 @@ export const collectionBoxPatchSchema = z.object({
 })
 
 export const collectionBoxCreateSchema = z.object({
-  title: z.string(),
   content: z.any().optional(),
   organizationId: z.string().min(1),
 })
