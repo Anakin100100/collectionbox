@@ -50,7 +50,14 @@ export const MemoCollectionBoxCreateForm = React.memo(
       const fetchOrganizations = async () => {
         console.log("fetching organizations")
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_APP_URL}/api/organizations`
+          `${process.env.NEXT_PUBLIC_APP_URL}/api/organizations`,
+          {
+            headers: {
+              "Cache-Control": "no-cache, no-store, must-revalidate",
+              Pragma: "no-cache",
+              Expires: "0",
+            },
+          }
         )
         const organizations = await response.json()
         console.log(organizations)
