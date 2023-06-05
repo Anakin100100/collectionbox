@@ -88,7 +88,7 @@ export default async function OrganizationPage() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
-              ${parseInt(orgStats[0].donors)}
+              ${parseInt(orgStats[0].donations)}
             </div>
             <p className="text-xs text-muted-foreground">within last 30 days</p>
           </CardContent>
