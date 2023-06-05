@@ -12,10 +12,10 @@ datasource db {
 
 model Account {
   id                String   @id @default(cuid())
-  userId            String
+  userId            String   @map("user_id")
   type              String
   provider          String
-  providerAccountId String
+  providerAccountId String   @map("provider_account_id")
   refresh_token     String?  @db.String
   access_token      String?  @db.String
   expires_at        Int?
@@ -46,7 +46,7 @@ model User {
   id            String    @id @default(cuid())
   name          String?   @default("Name not provided")
   email         String?   @unique
-  emailVerified DateTime?
+  emailVerified DateTime? @map("email_verified")
   image         String?
   isOrgAdmin    Boolean   @default(false) @map(name: "is_org_admin")
   createdAt     DateTime  @default(now()) @map(name: "created_at")
@@ -76,7 +76,7 @@ model CollectionBox {
   sillyName      String   @default("Collection Box") @map(name: "silly_name")
   createdAt      DateTime @default(now()) @map(name: "created_at")
   updatedAt      DateTime @default(now()) @map(name: "updated_at")
-  userId         String
+  userId         String   @map("user_id")
   organizationId String   @map(name: "organization_id")
 
   user         User         @relation(fields: [userId], references: [id])
@@ -87,12 +87,14 @@ model CollectionBox {
 }
 
 model Organization {
-  id                String @id @default(cuid())
+  id                String   @id @default(cuid())
   name              String
-  adminId           String @unique
-  stripeId          String @unique
-  short_description String @default("")
-  long_description  String @default("")
+  adminId           String   @unique @map("admin_id")
+  stripeId          String   @unique @map("stripe_id")
+  short_description String   @default("")
+  long_description  String   @default("")
+  createdAt         DateTime @default(now()) @map(name: "created_at")
+  updatedAt         DateTime @default(now()) @map(name: "updated_at")
 
   admin         User            @relation(fields: [adminId], references: [id])
   CollectionBox CollectionBox[]
@@ -101,10 +103,12 @@ model Organization {
 }
 
 model Donation {
-  id              String  @id @default(cuid())
+  id              String   @id @default(cuid())
   ammount         Int
-  userId          String?
-  collectionBoxId String  @map(name: "collection_box_id")
+  userId          String?  @map("user_id")
+  collectionBoxId String   @map(name: "collection_box_id")
+  createdAt       DateTime @default(now()) @map(name: "created_at")
+  updatedAt       DateTime @default(now()) @map(name: "updated_at")
 
   user          User?         @relation(fields: [userId], references: [id])
   collectionBox CollectionBox @relation(fields: [collectionBoxId], references: [id])

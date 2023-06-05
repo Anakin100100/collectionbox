@@ -8,6 +8,10 @@ import { authOptions } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { getCurrentUser } from "@/lib/session"
 
+import { DollarSign, Users } from "lucide-react"
+
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+
 export const metadata = {
   title: "Organization",
   description: "Manage your organization and your donations.",
@@ -20,7 +24,11 @@ export default async function OrganizationPage() {
     redirect(authOptions?.pages?.signIn || "/login")
   }
 
-  const dbUser = await db.user.findUnique({ where: { id: user.id } })
+  const dbUser = await db.user.findUnique({
+    where: { id: user.id },
+    include: { organization: true },
+  })
+
   if (!dbUser?.isOrgAdmin) {
     return (
       <DashboardShell>
@@ -56,18 +64,47 @@ export default async function OrganizationPage() {
     )
   }
 
-  const dbOrg = await db.organization.findFirst({
-    where: { adminId: dbUser.id },
-  })
+  const orgStats = await db.$queryRaw<{ donations: number; donors: number }>`
+    SELECT 
+      COALESCE(SUM(donations.ammount), 0) as donations,
+      COALESCE(COUNT(DISTINCT donations.user_id), 0) as donors
+    FROM donations 
+    LEFT JOIN collection_boxes ON collection_boxes.id = donations.collection_box_id
+    WHERE organization_id = ${dbUser.organization?.id} AND donations.created_at > current_timestamp() - INTERVAL '1 month'
+  `
 
   return (
     <DashboardShell>
       <DashboardHeader
-        heading="Billing"
-        text="Manage billing and your subscription plan."
+        // @ts-expect-error
+        heading={dbUser.organization?.name}
+        text="Manage your organization and your donations."
       />
-      <div className="grid gap-8">
-        <p id="welcome-paragraph">Welcome {dbOrg?.name}</p>
+      <div className="grid gap-4 md:grid-cols-2 ">
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Total Revenue</CardTitle>
+            <DollarSign className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">
+              ${parseInt(orgStats[0].donors)}
+            </div>
+            <p className="text-xs text-muted-foreground">within last 30 days</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Donors</CardTitle>
+            <Users className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">
+              +{parseInt(orgStats[0].donors)}
+            </div>
+            <p className="text-xs text-muted-foreground">within last 30 days</p>
+          </CardContent>
+        </Card>
       </div>
     </DashboardShell>
   )

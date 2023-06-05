@@ -131,7 +131,7 @@ export function UserAuthForm({ className, page, ...props }: UserAuthFormProps) {
               }}
             />
             <Label htmlFor="consent">
-              I agree to you agree to the{" "}
+              I agree to the{" "}
               <Link
                 href="/terms"
                 className="hover:text-brand underline underline-offset-4"
