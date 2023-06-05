@@ -22,12 +22,7 @@ interface EditorProps {
   collectionBox: Pick<
     CollectionBox,
     // @ts-expect-error
-    | "id"
-    | "content"
-    | "totalDonations"
-    | "shortDescription"
-    | "longDescription"
-    | "organizationName"
+    "id" | "content" | "totalDonations" | "description" | "organizationName"
   >
   readonly: boolean
 }
@@ -186,8 +181,7 @@ export function Editor({ collectionBox, readonly }: EditorProps) {
           <DonationForm
             className={""}
             collectionBoxId={collectionBox.id}
-            shortDescription={collectionBox.shortDescription}
-            longDescription={collectionBox.longDescription}
+            description={collectionBox.description}
             organizationName={collectionBox.organizationName}
           />
         </div>

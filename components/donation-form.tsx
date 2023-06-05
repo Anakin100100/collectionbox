@@ -15,12 +15,12 @@ import {
 import { toast } from "@/components/ui/use-toast"
 import { Icons } from "@/components/icons"
 import { Input } from "@/components/ui/input"
+import { de } from "date-fns/locale"
 
 export function DonationForm({
   className,
   collectionBoxId,
-  shortDescription,
-  longDescription,
+  description,
   organizationName,
   ...props
 }) {
@@ -92,13 +92,12 @@ export function DonationForm({
   return (
     <div className={cn(className, "w-full")}>
       <Card>
-        <CardHeader>
+        <CardHeader className="p-4">
           <h1 className="text-center text-2xl">{organizationName}</h1>
           <CardDescription className="text-center">
-            {shortDescription}
+            {description}
           </CardDescription>
         </CardHeader>
-        <CardContent className="text-center">{longDescription}</CardContent>
         <CardFooter className="flex flex-row justify-center">
           <div className="mr-2">
             <Input

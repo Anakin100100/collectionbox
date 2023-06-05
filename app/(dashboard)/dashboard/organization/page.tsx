@@ -7,6 +7,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { authOptions } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { getCurrentUser } from "@/lib/session"
+import { OrgDescriptionForm } from "@/components/org-description-form"
 
 import { DollarSign, Users } from "lucide-react"
 
@@ -106,6 +107,14 @@ export default async function OrganizationPage() {
           </CardContent>
         </Card>
       </div>
+      <OrgDescriptionForm
+        organization={{
+          // @ts-expect-error
+          id: dbUser.organization?.id,
+          // @ts-expect-error
+          description: dbUser.organization?.description,
+        }}
+      />
     </DashboardShell>
   )
 }
