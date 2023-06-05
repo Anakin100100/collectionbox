@@ -23,6 +23,7 @@ export default async function DashboardPage() {
   const collectionBoxes = await db.collectionBox.findMany({
     where: {
       userId: user.id,
+      visible: true,
     },
     select: {
       id: true,

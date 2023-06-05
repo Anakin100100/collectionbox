@@ -24,7 +24,7 @@ async function getCollectionBoxesForUser(collectionBoxId: CollectionBox["id"]) {
       FROM collection_boxes
       LEFT JOIN donations ON donations.collection_box_id = collection_boxes.id
       LEFT JOIN organizations ON collection_boxes.organization_id = organizations.id
-      WHERE collection_boxes.id = ${collectionBoxId}
+      WHERE collection_boxes.id = ${collectionBoxId} AND collection_boxes.visible = true
       GROUP BY collection_boxes.id, organizations.description, organization_name;
     `
   return res[0]

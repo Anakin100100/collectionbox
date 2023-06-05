@@ -27,9 +27,12 @@ export async function DELETE(
     }
 
     // Delete the Collection Box.
-    await db.collectionBox.delete({
+    await db.collectionBox.update({
       where: {
         id: params.collectionBoxId as string,
+      },
+      data: {
+        visible: false,
       },
     })
 

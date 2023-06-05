@@ -78,6 +78,7 @@ model CollectionBox {
   updatedAt      DateTime @default(now()) @map(name: "updated_at")
   userId         String   @map("user_id")
   organizationId String   @map(name: "organization_id")
+  visible        Boolean  @default(true)
 
   user         User         @relation(fields: [userId], references: [id])
   organization Organization @relation(fields: [organizationId], references: [id])
