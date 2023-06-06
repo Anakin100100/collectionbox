@@ -50,7 +50,6 @@ specifiers:
   '@types/react': 18.0.15
   '@types/react-dom': 18.0.6
   '@typescript-eslint/parser': ^5.59.0
-  '@vercel/analytics': ^1.0.0
   '@vercel/og': ^0.0.21
   autoprefixer: ^10.4.14
   class-variance-authority: ^0.4.0
@@ -78,6 +77,8 @@ specifiers:
   next-themes: ^0.2.1
   nodemailer: ^6.9.1
   postcss: ^8.4.23
+  posthog-js: ^1.65.0
+  posthog-node: ^3.1.1
   prettier: ^2.8.8
   prettier-plugin-organize-imports: ^3.2.2
   prettier-plugin-tailwindcss: ^0.1.13
@@ -148,7 +149,6 @@ dependencies:
   '@sendgrid/mail': 7.7.0
   '@t3-oss/env-nextjs': 0.2.2_zod@3.21.4
   '@typescript-eslint/parser': 5.59.7_eslint@8.41.0+typescript@4.7.4
-  '@vercel/analytics': 1.0.1
   '@vercel/og': 0.0.21
   class-variance-authority: 0.4.0_typescript@4.7.4
   clsx: 1.2.1
@@ -165,6 +165,8 @@ dependencies:
   next-contentlayer: 0.3.2_77873e61bc9632a3ad171de7cc77f1ca
   next-themes: 0.2.1_77873e61bc9632a3ad171de7cc77f1ca
   nodemailer: 6.9.3
+  posthog-js: 1.65.0
+  posthog-node: 3.1.1
   prop-types: 15.8.1
   react: 18.2.0
   react-day-picker: 8.7.1_date-fns@2.30.0+react@18.2.0
@@ -3489,10 +3491,6 @@ packages:
       eslint-visitor-keys: 3.4.1
     dev: true
 
-  /@vercel/analytics/1.0.1:
-    resolution: {integrity: sha512-Ux0c9qUfkcPqng3vrR0GTrlQdqNJ2JREn/2ydrVuKwM3RtMfF2mWX31Ijqo1opSjNAq6rK76PwtANw6kl6TAow==}
-    dev: false
-
   /@vercel/og/0.0.21:
     resolution: {integrity: sha512-WgMahG5c8UM7xtn/mT+ljUpDMSDnSlu8AXL52JtTwxb1odrd0GWqZg2N1X38wulPj+sCccNpDdFmmAuw0GLc+Q==}
     engines: {node: '>=16'}
@@ -3774,6 +3772,15 @@ packages:
     resolution: {integrity: sha512-fPwcX4EvnSHuInCMItEhAGnaSEXRBjtzh9fOtsE6E1G6p7vl7edEeZe11QHf18+6+9gR5PbKV/sGKNaD8YaMeA==}
     dependencies:
       follow-redirects: 1.15.2
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
+  /axios/0.27.2:
+    resolution: {integrity: sha512-t+yRIyySRTp/wua5xEr+z1q60QmLq8ABsS5O9Me1AsE5dfKqgnCFzwiCZZ/cGNd1lq4/7akDWMxdhVlucjmnOQ==}
+    dependencies:
+      follow-redirects: 1.15.2
+      form-data: 4.0.0
     transitivePeerDependencies:
       - debug
     dev: false
@@ -5294,6 +5301,10 @@ packages:
     dependencies:
       node-domexception: 1.0.0
       web-streams-polyfill: 3.2.1
+    dev: false
+
+  /fflate/0.4.8:
+    resolution: {integrity: sha512-FJqqoDBR00Mdj9ppamLa/Y7vxm+PRmNWA67N846RvsoYVMKB4q3y/de5PA7gUmRMYK/8CMz2GDZQmCRN1wBcWA==}
     dev: false
 
   /fflate/0.7.4:
@@ -7796,6 +7807,22 @@ packages:
       picocolors: 1.0.0
       source-map-js: 1.0.2
 
+  /posthog-js/1.65.0:
+    resolution: {integrity: sha512-+hE8B24jp+n/AHRuND4ijC1fEKIK14XBO0RTvL1CThzVs7XJfdrH+FAo/qRe/19izC7G+n4NLrkIkaJuNZP8Kg==}
+    dependencies:
+      fflate: 0.4.8
+    dev: false
+
+  /posthog-node/3.1.1:
+    resolution: {integrity: sha512-OUSYcnLHbzvY/dxNsbUGoYuTZz5XNx48BkfiCkOIJZMFvot5VPQ0KWEjX+kzYxEwHeXbjW9plqsOVcYCYfidgg==}
+    engines: {node: '>=15.0.0'}
+    dependencies:
+      axios: 0.27.2
+      rusha: 0.8.14
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
   /preact-render-to-string/5.2.6_preact@10.15.1:
     resolution: {integrity: sha512-JyhErpYOvBV1hEPwIxc/fHWXPfnEGdRKxc8gFdAZ7XV4tlzyzG847XAyEZqoDnynP88akM4eaHcSOzNcLWFguw==}
     peerDependencies:
@@ -8425,6 +8452,10 @@ packages:
     resolution: {integrity: sha512-5l4VyZR86LZ/lDxZTR6jqL8AFE2S0IFLMP26AbjsLVADxHdhB/c0GUsH+y39UfCi3dzz8OlQuPmnaJOMoDHQBA==}
     dependencies:
       queue-microtask: 1.2.3
+
+  /rusha/0.8.14:
+    resolution: {integrity: sha512-cLgakCUf6PedEu15t8kbsjnwIFFR2D4RfL+W3iWFJ4iac7z4B0ZI8fxy4R3J956kAI68HclCFGL8MPoUVC3qVA==}
+    dev: false
 
   /rxjs/7.8.1:
     resolution: {integrity: sha512-AA3TVj+0A2iuIoQkWEK/tqFjBq2j+6PO6Y0zJcvzLAFhEFIO3HL0vls9hWLncZbAAbK0mar7oZ4V079I/qPMxg==}

@@ -1,13 +1,13 @@
 import { Inter as FontSans } from "next/font/google"
 import localFont from "next/font/local"
 
-import { Analytics } from "@/components/analytics"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/toaster"
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
 import "@/styles/globals.css"
+import Providers from "./providers"
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -74,12 +74,21 @@ export default function RootLayout({ children }: RootLayoutProps) {
           fontHeading.variable
         )}
       >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          {children}
-          <Toaster />
-          <TailwindIndicator />
-        </ThemeProvider>
-        <Analytics />
+        <Providers>
+          <body
+            className={cn(
+              "min-h-screen bg-background font-sans antialiased",
+              fontSans.variable,
+              fontHeading.variable
+            )}
+          >
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+              {children}
+              <Toaster />
+              <TailwindIndicator />
+            </ThemeProvider>
+          </body>
+        </Providers>
       </body>
     </html>
   )
