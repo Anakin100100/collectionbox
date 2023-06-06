@@ -7,6 +7,7 @@ import { usePathname, useSearchParams } from "next/navigation"
 import { useEffect } from "react"
 
 if (typeof window !== "undefined") {
+  console.log("initializaed posthog")
   posthog.init(process.env.POSTHOG_KEY, {
     api_host: process.env.POSTHOG_HOST,
   })
