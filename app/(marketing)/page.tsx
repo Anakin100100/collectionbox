@@ -175,5 +175,3 @@ export default async function IndexPage() {
     </>
   )
 }
-
-export const runtime = "edge"
