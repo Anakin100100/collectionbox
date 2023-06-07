@@ -1,8 +1,15 @@
 export async function GET(req: Request) {
-  await fetch("https://collectionbox.online", { cache: "no-cache" })
-  await fetch("https://collectionbox.online/editor/cliinp4d00001jd08vlfhl7nm", {
+  const res1 = await fetch("https://collectionbox.online", {
     cache: "no-cache",
   })
+  console.log(await res1.text())
+  const res2 = await fetch(
+    "https://collectionbox.online/editor/cliinp4d00001jd08vlfhl7nm",
+    {
+      cache: "no-cache",
+    }
+  )
+  console.log(await res2.text())
 
   const headers = new Headers({
     "Cache-Control": "no-cache",
