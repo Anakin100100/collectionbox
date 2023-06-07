@@ -1,4 +1,4 @@
-export async function GET(req: Request) {
+export async function POST(req: Request) {
   const res1 = await fetch("https://collectionbox.online", {
     cache: "no-cache",
   })
