@@ -8,6 +8,9 @@
 # testing
 /coverage
 
+#cypress
+/cypress/videos
+
 # cokroachdb
 /cockroach-data
 

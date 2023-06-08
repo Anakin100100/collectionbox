@@ -10,7 +10,8 @@
     "start": "next start",
     "lint": "next lint",
     "preview": "next build && next start",
-    "cypress": "cypress open"
+    "cypress": "cypress open",
+    "cypress:run": "cypress run"
   },
   "dependencies": {
     "@editorjs/checklist": "^1.5.0",

@@ -19,7 +19,7 @@ export default async function IndexPage() {
             media in a few minutes.
           </p>
           <div className="space-y-3">
-            <div>
+            <div id="createCollectionboxButton">
               <Link
                 href="/dashboard"
                 className={cn(buttonVariants({ size: "lg" }))}
@@ -27,9 +27,9 @@ export default async function IndexPage() {
                 Create one
               </Link>
             </div>
-            <div>
+            <div id="contactUsButton">
               <Link
-                href="mailto: pawelbiegun@collectionbox.online"
+                href="/contact"
                 className={cn(buttonVariants({ size: "lg" }))}
               >
                 Contact us
@@ -47,7 +47,10 @@ export default async function IndexPage() {
             Features
           </h2>
         </div>
-        <div className="mx-auto grid justify-center gap-4 sm:grid-cols-2 md:max-w-[64rem] md:grid-cols-3">
+        <div
+          id="featuresGrid"
+          className="mx-auto grid justify-center gap-4 sm:grid-cols-2 md:max-w-[64rem] md:grid-cols-3"
+        >
           <div className="relative overflow-hidden rounded-lg border bg-background p-2">
             <div className="flex h-[180px] flex-col justify-between rounded-md p-6">
               <svg
