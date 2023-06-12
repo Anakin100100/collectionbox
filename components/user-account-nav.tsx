@@ -24,6 +24,7 @@ export function UserAccountNav({ user }: UserAccountNavProps) {
         <UserAvatar
           user={{ name: user.name || null, image: user.image || null }}
           className="h-8 w-8"
+          id="avatarDropdown"
         />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
@@ -50,6 +51,7 @@ export function UserAccountNav({ user }: UserAccountNavProps) {
         <DropdownMenuSeparator />
         <DropdownMenuItem
           className="cursor-pointer"
+          id="signOutButton"
           onSelect={(event) => {
             event.preventDefault()
             signOut({

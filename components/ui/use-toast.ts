@@ -135,23 +135,26 @@ function dispatch(action: Action) {
   })
 }
 
-interface Toast extends Omit<ToasterToast, "id"> {}
+type Optional<T, K extends keyof T> = Pick<Partial<T>, K> & Omit<T, K>
+type Toast = Optional<ToasterToast, "id">
 
 function toast({ ...props }: Toast) {
-  const id = genId()
+  if (props.id === null || props.id === undefined) {
+    props.id = genId()
+  }
 
   const update = (props: ToasterToast) =>
     dispatch({
       type: "UPDATE_TOAST",
-      toast: { ...props, id },
+      toast: { ...props },
     })
-  const dismiss = () => dispatch({ type: "DISMISS_TOAST", toastId: id })
+  const dismiss = () => dispatch({ type: "DISMISS_TOAST", toastId: props.id })
 
   dispatch({
     type: "ADD_TOAST",
+    // @ts-expect-error
     toast: {
       ...props,
-      id,
       open: true,
       onOpenChange: (open) => {
         if (!open) dismiss()
@@ -160,7 +163,7 @@ function toast({ ...props }: Toast) {
   })
 
   return {
-    id: id,
+    id: props.id,
     dismiss,
     update,
   }

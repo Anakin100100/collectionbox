@@ -37,7 +37,10 @@ export default function LoginPage() {
           </p>
         </div>
         <UserAuthForm page="Sign In" />
-        <p className="px-8 text-center text-sm text-muted-foreground">
+        <p
+          className="px-8 text-center text-sm text-muted-foreground"
+          id="createAccountButton"
+        >
           <Link
             href="/register"
             className="hover:text-brand underline underline-offset-4"

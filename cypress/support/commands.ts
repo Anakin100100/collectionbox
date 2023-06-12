@@ -35,5 +35,37 @@
 //     }
 //   }
 // }
+// @ts-expect-error
+Cypress.Commands.add("login", (email) => {
+  cy.session(
+    ["default"],
+    () => {
+      cy.visit("http://localhost:3000/login")
+      cy.get("#email").type(email)
+      cy.get("#signUpButton").click()
+      cy.get("#successfulSignInToast")
+        .find("#toastDescription")
+        .should(
+          "have.text",
+          "We sent you a login link. Be sure to check your spam too."
+        )
+      cy.wait(5000)
+      cy.task("getLastEmail")
+        .its("html")
+        .then((html) => {
+          cy.document({ log: false }).invoke({ log: false }, "write", html)
+        })
+      cy.get("#signInText").should(
+        "have.text",
+        "Please click the link below to sign in to your account:"
+      )
+      cy.get("#signInLink").click()
+      cy.url().should("contain", "http://localhost:3000/dashboard")
+    },
+    {
+      cacheAcrossSpecs: true,
+    }
+  )
+})
 
 export {}

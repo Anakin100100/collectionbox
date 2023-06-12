@@ -42,6 +42,7 @@ export function UserAuthForm({ className, page, ...props }: UserAuthFormProps) {
         description:
           "You have to agree to our privacy policy and terms of service before you register.",
         variant: "destructive",
+        id: "consentNotObtainedToast",
       })
 
       return
@@ -91,6 +92,7 @@ export function UserAuthForm({ className, page, ...props }: UserAuthFormProps) {
     return toast({
       title: "Check your email",
       description: "We sent you a login link. Be sure to check your spam too.",
+      id: "successfulSignInToast",
     })
   }
 
@@ -148,7 +150,11 @@ export function UserAuthForm({ className, page, ...props }: UserAuthFormProps) {
               .
             </Label>
           </div>
-          <button className={cn(buttonVariants())} disabled={isLoading}>
+          <button
+            className={cn(buttonVariants())}
+            disabled={isLoading}
+            id="signUpButton"
+          >
             {isLoading && (
               <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
             )}

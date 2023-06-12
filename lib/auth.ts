@@ -39,8 +39,8 @@ export const authOptions: NextAuthOptions = {
           <html>
           <body>
             <h1>Welcome Back</h1>
-            <p>Please click the link below to sign in to your account:</p>
-            <a href="${url}">Sign In</a>
+            <p id="signInText">Please click the link below to sign in to your account:</p>
+            <a href="${url}" id="signInLink">Sign In</a>
           </body>
           </html>
         `
@@ -49,8 +49,8 @@ export const authOptions: NextAuthOptions = {
           <html>
           <body>
             <h1>Activate your account</h1>
-            <p>Please click the link below to activate your account:</p>
-            <a href="${url}">Activate Account</a>
+            <p id="signUpText">Please click the link below to activate your account:</p>
+            <a href="${url}" id="signUpLink">Activate Account</a>
           </body>
           </html>
         `

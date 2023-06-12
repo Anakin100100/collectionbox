@@ -178,6 +178,7 @@ export const MemoCollectionBoxCreateForm = React.memo(
             disabled={isLoading}
             onClick={handleSubmit}
             {...props}
+            id="createCollectionBoxButton"
           >
             Create Collection Box
           </button>

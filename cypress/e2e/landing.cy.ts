@@ -1,6 +1,17 @@
 describe("Navigation", () => {
+  let userEmail
+
+  before(() => {
+    // get and check the test email only once before the tests
+    cy.task("getUserEmail").then((email) => {
+      expect(email).to.be.a("string")
+      userEmail = email
+    })
+  })
+
   it("should navigate to the about page", () => {
-    // Start from the index page
+    //@ts-expect-error
+    cy.login(userEmail)
     cy.visit("http://localhost:3000/")
 
     // Find a link with an href attribute containing "about" and click it
@@ -11,6 +22,8 @@ describe("Navigation", () => {
   })
 
   it("should go to /dahsboard for logged in user when Create One button is clicked", () => {
+    //@ts-expect-error
+    cy.login(userEmail)
     cy.visit("http://localhost:3000/")
     cy.get("#createCollectionboxButton").click()
     cy.url().should("equal", "http://localhost:3000/dashboard")

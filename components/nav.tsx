@@ -31,6 +31,7 @@ export function DashboardNav({ items }: DashboardNavProps) {
                   path === item.href ? "bg-accent" : "transparent",
                   item.disabled && "cursor-not-allowed opacity-80"
                 )}
+                id={item.id}
               >
                 <Icon className="mr-0 h-4 w-4 lg:mr-2" />
                 <span className="hidden w-0 lg:visible lg:block lg:w-auto">
