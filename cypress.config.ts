@@ -3,6 +3,7 @@ import { defineConfig } from "cypress"
 const nodemailer = require("nodemailer")
 const Imap = require("imap")
 const simpleParser = require("mailparser").simpleParser
+import { db } from "@/lib/db"
 
 async function makeEmailAccount() {
   const testAccount = await nodemailer.createTestAccount()
@@ -72,6 +73,23 @@ async function setupNodeEvents(on, config) {
     getLastEmail: async () => {
       const lastEmail = await emailAccount.getLastEmail()
       return lastEmail
+    },
+    addOrgToUser: async ({ email }) => {
+      const user = await db.user.findFirst({ where: { email: email } })
+      const updatedUser = await db.user.update({
+        //@ts-expect-error
+        where: { id: user.id },
+        data: { isOrgAdmin: true },
+      })
+      const organization = await db.organization.create({
+        data: {
+          name: "AcmeCharity",
+          adminId: updatedUser.id,
+          stripeId: "acct_1N8LGfKE8acZIhT8",
+        },
+      })
+
+      return { user: updatedUser, organization: organization }
     },
   })
 }

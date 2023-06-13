@@ -91,7 +91,7 @@ model Organization {
   id          String   @id @default(cuid())
   name        String
   adminId     String   @unique @map("admin_id")
-  stripeId    String   @unique @map("stripe_id")
+  stripeId    String   @map("stripe_id")
   description String   @default("The description of the organization")
   createdAt   DateTime @default(now()) @map(name: "created_at")
   updatedAt   DateTime @default(now()) @map(name: "updated_at")

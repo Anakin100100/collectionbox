@@ -1,4 +1,7 @@
 /// <reference types="cypress" />
+
+import { result } from "cypress/types/lodash"
+
 // ***********************************************
 // This example commands.ts shows you how to
 // create various custom commands and overwrite
@@ -36,7 +39,7 @@
 //   }
 // }
 // @ts-expect-error
-Cypress.Commands.add("login", (email) => {
+Cypress.Commands.add("login", (email: string) => {
   cy.session(
     ["default"],
     () => {
@@ -61,6 +64,9 @@ Cypress.Commands.add("login", (email) => {
       )
       cy.get("#signInLink").click()
       cy.url().should("contain", "http://localhost:3000/dashboard")
+      cy.task("addOrgToUser", { email: email }).then((res) => {
+        localStorage.setItem("userData", JSON.stringify(res))
+      })
     },
     {
       cacheAcrossSpecs: true,
